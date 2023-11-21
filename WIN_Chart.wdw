@@ -1,0 +1,664 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WIN_Chart
+ major_version : 28
+ minor_version : 0
+ type : 2
+ description : ""
+ subtype : 0
+window :
+ name : WIN_Chart
+ identifier : 0x286fcf94067ccd94
+ internal_properties : CAAAAAgAAAA+i2SVHnMbQAOtGz+6BXnV59dRrmdJxo2e3QgTry+UYXos50fJT0k/BDoEPf2ItVMK9bqVjbVKTpsjWSc2z8iMvjaVvyri0WyqomvwKJ83y0lRf2lUd7h0piLUV/sbTV+ODt7anESrZYmDZtgoJVNsAPyCCCT79ualHOUthyy5Kzs8bL1rPfLgwr0w1ymfmSWYKzW2dx6NSWpg0la6u7U0sQAE+M8hNvSYoCGU+99XFj3Hlc5Cn92/Q1iJyZEjLcG0yOwSy/IXd9iGVKTOPM2PZ3ObXLeYyL/LOUOlWjOt082qv6XlH4h5N8spD1GdH9mXulksG/JjYn7FkU2+mybqGSXAD5RwowA8B1h7oWjrf66e/qb4zmZ+vl8UlgUhVY+okGB/NkKGDe3/eAnV/kT6rDUdUUxQk0mnGtT43otsUmWxHp5GKZTZhCp/+b7enwvr3Q0BhCR8jAQ71UougNA1plHrR4qHFFsHfnRuo2fqiZ7NAffbWbEKJc31L7mRpclO2bnq7g6UGCBRMxC+2luMsBVk9dXVdkIs2eVFO45cKX+yehZE1a3m/hwKpXyq4m7rokD0dymdZ9VR6XJgdmJRryhEVLPV/msOZ0qQQYyotIQB5SqoAI57jFCPg7zWuuZ985OlNXcUFC4QhI3gHNwMlSfWawy1RWK0UrbHK3Pe/NfCoCh3YtE8duIaAEFV/qWwi90eIVshJJkq54rSLLa8srxc+oHkLZZk5RPfAYcUpeCFD1Jm8hq6VufB4fehVWzCGwM9MzA/0SkIoS0y8KV9YE0fKfeow9x8+qiPhmirKYTds4YD8MVlYnHJjxbQH9jSMUpBrKoQZpQY+30nPnq3FP0+FbvbeT7u6Ff2AoaeKtpwx+ucGSno4XsXjZBld9ClWqEc0083Ng==
+ properties :
+  width : 804
+  height : 511
+  widthClient : 802
+  heightClient : 479
+ controls :
+  -
+    name : TAB_Tab
+    identifier : 0x286fcf94067dcd94
+    internal_properties : CAAAAAgAAACyssL+7y3auBiVvICDpuktxlBjc3CRPZMEXimju/BrKNW7rUeXl3EQYf6JR20Jv7U6W4m8f6qMW7mfBkb7UMmOc8FnEsZDMzpiBM0FB0CfTPoZCIcYbud5RuSbX4QMgLdy6ZF+mlIlaT1MbgyeGpslK9FExVhxunL4S+ENbA1xCnwPWk1LNGlVaJr1suAg2e6CMx8d/bO+XUh2xUs3cq6XsO1WvlUPWNZZNxW7H2zS2gIWcv3mlF2ICGxvg6Kk9lKPBGK2NajC1imtYeTUNln94nylusV9a7VrkP7uiEZ57Kg5iyPdEjDcE8Uw9JbkdOVRTcKbRT9+8tGkzEvZCTVLRLdgvUpRv52eD3nbAIe/ABJldlknAI2h2GpQDkM2i94atKIQESf6vQ2O2Lfkj4JBMjRxi+AW6zykt3sQQu7Ea817rfoKTrbRsgJDgoaHHnDnZZFcrkVP1Z+RzKhafM9bOrkoSHoZOIfzZmt1nXVtHKw4GhrCBkURmRU/iOu7KMERyvDTXK3v5U0XKs5ZJXsGgl2PgqAHDMw3+pXTqJ+caT7aOocpveuxRMyXiOY2kZSe196EGCJum34uq/fnGTbtSvIgYfoeUfN/0BnVnoxxQ0z83enb+OIBgc3JCtiQwCs5VJN9lF/UKJ6tkcmxCY8NZYxUMOXLasUOoLyMdWhE/fH4vHhDDQ72brFQXsZjRj4z2LZRd8+wR0v9gy8o1O3FECWFbKv7na2vC3YXKNf907EcnWhlAYnbcVBXJUMLEYamr5eZLc/TW+XfJhBva3fGVakER4f0N7T5MWVQHs2cbS9b3H1iT19BLlZinKSuuPE/ImpEOUFdRYTDl07n6RVqEDG6VepxMb9R2Ub/YXO8kKPhacxX3Eqmj2kFZ6ZTcLB+Isenc+/p0N2Ed3jYO2mM+7l+OH6IhBiP3D03sNKLaHQOjEYb28ItpF9K43w6DmEKafXwZ6raMZ2AxODD479lW667YKC63VrFbnEI7y9/HxzmzMRiMrooIFfOSPqxGDeIS2KrA2SOusy3HMsuHsqaHVw8nOkDKOGzApCgbEGISFE9tCsEnYzBzwc9bIA2p3xtHOxvwQk0mHSjVJ+lyf4Kec7A/nulm0rWGzjU2BAkECBLqcj7o5YIh2ce159d/PDb4BiKYYPS7JuaBtqQftMILfx36RMCZ50qqSbSod/PCTm7XFJoRtmNSF+0xIbwuovHssYjMCiJx1vpj68RN4GxCmWC3WZPWIrnHLz9AWY=
+    properties :
+     x : 6
+     y : 6
+     width : 633
+     height : 427
+    tabs :
+     -
+       internal_properties : CAAAAAgAAACZVdOclmhcGaz2aHmkX6axNJvsvMetpXouaSZ23T1yxnPwdYLT0IuYyNiREguNk51lucwzhqqY68JE+VLOcJV7varehcaaUXEgbFeUISozOcsmOXTjYr/rmTDkMUVXrbO36OETsTKrCX2WQuTnHVNpbpw8ZJ3+E8QcL4DLqCTjHZBv5FahpShXdDxwQvKl
+       controls :
+        -
+          name : IMG_Column_chart
+          identifier : 0x286fcf94067fcd94
+          internal_properties : CAAAAAgAAAAbu6rubmtmVThUhFzs2OI9tom5zmc5yevIccL24vkhBCjWxQ0lHHrCSPcxqqMVEuFTfD7NyD5v+2k/4wV7qHIozZLl9AHv+CEX6xxml4VwQKjidIv8ILOKG/d4k/ESSpkTfQ83y7V+oor74Dr45P0WyF2nBoTGXxZLu5fkR+L/IE8By1SXsU0+0UqsuflseVZhgAuO6/6KVQGhcYB4r+PEL+r5K+On7rg7pKK92M0mt7O9MMXBsWkfqwIgY7JoqYqiv3xkGanPMhuEwr09iFxJ/oziy9dq5eI4UR65oyT/Adz3xHCUwSqQSBkAZtcianRsXxb26k9m8CwheHoZBNT0wf/kZ06kgY89hMHp+/MoxeCQg2DHpDJqr6BdGN8SLuAehRsQd1cnuWMREJ3cua1g5J+N/6f64/R4PR1BSwJBOBFtQiOwNEFRVFwgroBOUSCMn3yXbgGpG3V98QwF705Sy7qDvtqyf3fcSSEasWICUeltCHmCvChSwM5NxHtoD+7bY+mANXz49kjmAoHp4Fb6lRE2iagLH/gIyVzp9X8oc4c9VAONRTH1nBgm1eAFwL7LGkdShaCOpLqRXNWGBQDqmWWiPIDeOPbFcG7s3wV8cFDg2M7bVUECwn6o1Udt0YZ/ejnji7JtaMJ4SqWcc9/f0HNHjz6BPJRyvdlIFjstrSYrSdDXZXZjX1WBZm7HBSbx+Dyecf5IRnMUkEW0Tnnm72OQaVsqMmjcIVbLKNDZQtbS8URDiU7VebxgY2iKG4wgwD/iJRPnXNjyBY3OjhfuNcAWrNlnQgNywNUrJ4S3UyVAImObtVDlc0vo8GQIh9CCG1Cndv8DORM=
+          properties :
+           x : 7
+           y : 36
+           width : 620
+           height : 357
+          type : 8
+          code_elements :
+           type_code : 8
+           p_codes :
+            -
+              code : |1-
+               
+              type : 18
+        -
+          name : BTN_DrawHistogram
+          identifier : 0x286fcf940680cd94
+          internal_properties : CAAAAAgAAAAPFiQE1iFx7xrpENPITf81lzWm9v47VUuFyRIAiPY0Pxj55eVQcWHTDvPtGTnr7yuzN5JJVWhzlRYVHKoe492iNQo1sxPr7iRhurceXx50DCTWzKxHQcNooTbBJL5IS/3A4s2Rk4494oUvkLYO8xgCsUzv8ETRF63I3tIn36PfX+lwp/3gf22GPRThqCgSel576kAoyVqXM0d37ICQm92PfKy/55tiHZQjHjLovZtTmwvKiRCAZry61pUwh3VD3BUDeRjZLBfMTanWSFHRYbSfxBBq+q/bn1U7kn8QElkQ0Tfbb/7TK99fttyjRVUZNf4Je478J0Za+yzi5uvAA8GKuH1LlC16h7IB8dsqdnOFWhaxO7M3pdaBQrNlq9s1SUyvWrG5M/cKmrj5xTMJ3xSevsWI/kdR5FKWbUWlQ+ylGxTiPxDiHuIVfNqwBLSr97VOfQq4r2jj27pODUL029Crg4Ze0miIs7GI5zxsNu7jz6F9EmgPqNnMNay2M7fSC/acuODOG+GTuACqvP7fNXsXU1PGiAf4x0Z7xBaDaxTVXEwzEdmNahzKKTDY+h1qb9axflPHVIGZxDUxWL1/FmxLeBhv3kxSEN2TFXLbAFMsMmw67EoJsyLIhLh5CyUrcWqgVObUZPtGSI66wCDKq+Y/9zi5R3Fv5A9HXJ/XHJYMZnrLiQkrk9cQ23iC/ntng7bMFCN9wu6xP4JGkmW2P6Q+dGL0UzGskTAZI8Feep+M6wHpBjeiAvbTuvOYi/+Hh7V1X4PMorkyPevIHVm+x8DGDBOqEXp6OQb7mIHWigu2pSqCkftzPzu0Rz41ZOLYlHr5VQk4HixwlEFPXkmWMRi1xWJkCrIZ+uLXy/nv/uBndooGXESTtpzVWd88PYoZO+Nx2qiEoA==
+          properties :
+           x : 437
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAAAzVN75qqI9Z62USSdxUbNliDqcRo/lQ1AE1aJ7ksya+dgryGe2b0S4dy6MoTMB0whUujvCTHKRL9+i/t1pLsSNevUIjvAWCTw+WoNXMacmG04KMs+XHuUXWLnLMJ7kcJbknSpvHSzNrU6lym7UWr6G+/3+q8RtQHF0sgaYp1eaasVPSCvr1fx4sNyoFlqD8et940471NcLyjLL3Ma6S0KxDyl3NLb7+XbvY8CwxerLYzRBheSg8k8IseQ/2662Qzfwd6gnOtNHHuiVF8UA5bEcv1vl4/PRx6r1mQQlQAum9XeloXWVkO4n6pu789Nw9s247Hk6Ug4zkaag++qoQn//62CJOmx2afLwg4MgZU0/+AIz74SighbagU/LtPpktyHfZpYPw304GozCzmul3zBFTzYoibr1PW+dXRuaDvyVS+Nq3z8f2AeDMnzHof3RW9zFm1xm2tpJvzl4Wy9TlKwcNK1fa69M+/isR+lGuGQSpOT3MeRTj1lQg+zXj6MmFdWEu7B+aMPs19HNlhxsnFsEugaRR9XzOoE6TLOStvf3S1ClRK1g0zgdJ27uC1yVJmjG4pmcQsylGyU0N3rw6YSPHCLQnarqBwEcR5bDqG/TFLxzVWtyozXVnaJ+fCNiqexS7c9TihoNPA6co+LfjfqnhW+KjBKjvxJkPLyXkgbwFzMFSXYgTj2IWaTi2D38fI8D8YYLWHxh7OgywoEpgFDguNc1I+SQuPUyWesQs4p8cOm0WlMacAXo0uPxzrPm+LxfhY4szX2V+kdMVv4OaTYPdNcMD7RNAaq9XAvSIxi2PnZ85c0ONWYjQEdt2gUlPTw3PnNmb06peXN9wxa4E/ZTl64dKlMmshtd45N6nPAHPh995hsrKy9qio8knuV7b+Y262kZJ4p8XiVjNrWgiVWp2DG1LxZRvtQpjdiv06SVFw1A0PAp9bULp57RHjKDmWPbyO05Pv6HMW63xyyI
+              code : |1-
+               sChartName is string = <§$0000§>
+               
+               // Create the chart
+               grCreate(sChartName,grColumn)
+               
+               // Configure the destination of the chart
+               grDestinationControl(sChartName,"WIN_Chart.IMG_Column_chart")
+               
+               // Font of the chart
+               grTitleFont(sChartName,"Arial",10,Black)
+               
+               // Title of the chart
+               SWITCH RADIO_TitlePosition
+               	CASE 1 // At the top
+               		grTitle(sChartName,<§$0001§>,grAtTop)
+               		
+               	CASE 2 // At the bottom
+               		grTitle(sChartName,<§$0001§>,grAtBottom)
+               		
+               	CASE 3 // No title
+               		grTitle(sChartName,<§$0001§>,grNone)		
+               END
+               
+               // Position of the legend
+               SWITCH RADIO_LegendPosition
+               	CASE 1 // on the left
+               		grLegend(sChartName,grAtLeft)
+               		
+               	CASE 2 // to the right
+               		grLegend(sChartName,grAtRight)
+               		
+               	CASE 3 // Without legend
+               		grLegend(sChartName,grNone)	
+               END
+               
+               
+               LOCAL
+               	i is int
+               	
+               FOR i = 1 TO 20
+               	
+               	// Add a data
+               	grAddData(sChartName,1,Random(0,200))
+               	
+               	// Legend of this value
+               	grCategoryLabel(sChartName,i,StringBuild(<§$0002§>,i))
+               	
+               END
+               
+               // Draw this chart
+               grDraw(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+        -
+          name : BTN_DeleteHistogram
+          identifier : 0x286fcf940681cd94
+          internal_properties : CAAAAAgAAAB5IKp4m5GggeDY5R+hkVE9S+CZ04iL4rs8YLthy9IXQ43GeK1bMzbXlFr4DvJO1lvfekURuh38S6izha19uOzF9ehLweDnd8rjmVrgSJvgF53O8xUWvFwF5iCRWPDDp0+V6gu72AMHrYVrSUbNxkcpt1cxcQlsOiFKnHHx6+aQSfxQe5afPx9k2JESJ8dn5iI4ElWFQ73TVFb5yo+We2NXaQx8nJF32QZ5amizrgFsSKZJR9IoKDly4z+E9GmtYT6xPnD2O6PU9+Mk18+KD1NsgVN6292xxlbysTdH/octQn0H4bCCwX7fFuZ+4+w+IDw6GS6BlzePsSbZ3g2LEi/Xoa3tCbrwyveC5qvswfRD4aCbXUoGyQyY0fdI4/R93WTKQ1b7SUqnS2C2VeNUsEYrLLlU39ZbHYVmdY87H8bseOUAk8x0UrFQxfWbS2dx5bXvsbCmdhgQ8UZNBVfp5/jwU55NUdEsZM2uME5nK0zZBjM9VRduotoimRPGoNIAKZ1+Sk/R0rfqPMpRznmqNa+sI1W5x+J+zpbxjQQS4vbnZdgRqsrIrGXutyv06QqoDUfXdpCEH0VSvv2M3Ay4fIr8xhg8y4eQ1wszRgSsJ82O9wY209koJxuEzsG9JBCPCedQtpU/5YPR+jJ9Nicp92YIc+g0bvhLw1ET+zHifbi+EchLDjLceTTeqzXgJYz9Cc9KvJp8Czhyc0DRzIaxv+DNptQywczaZIs5GWf65MndTl6O6DSlazHt+L78ysrip8PhF6PtC/sKP4lVb90Vy1CZZtLFE4cJVmV3dmrIsnoFPxZe1ML2H0p8gfYQ/H5Qxq5a5JHormE8vOM650Fy6s0HiNPbCw9FYW9/ayHqtDL9dpA6578lAm4CPIa2wZ4b08eevX/QqwO1lpOL
+          properties :
+           x : 538
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAABQPNh9fDMkbVNGCtxDM8jX62M/42Ik/NuHyBzsV4rbqNeqjCHIalxihjUPCgjeA//e8kcloNQAJgXWBkAozNdm8gO8ZFc1EttXRUpNz2C6UAV89FJXOrSiOEeFod7Eoi0qJFUYzHJnUoBCPzW62h0TsIqBIG3xBLqQm/plPqRmk0r7m6rK88Z9EapoFHMcFYjREpTskoV5sT9vvXjEWIJoU0j5qF48w2PIvczD4RCeNaGZKeRPc98qQNKxqZfnDr0gC0QraG4hIehhSwYqGx8c
+              code : |1-
+               sChartName is string = "MyBarChart"
+               // Delete the chart
+               grDeleteAll(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+     -
+       internal_properties : CAAAAAgAAACiPUBcgUsXhtH9WF31xOCLHQVyQ+VHgsLqBpPUtWtROJ0tpT3M3q02/rxCUkOJGXMtSQ7hb9KsHZLnFvuQRhU68XipbgVwO87yT2/bavbzcEXFXD/fjr1yKa8ojNbTIVwxlYLwBSCdipvHLtfo5Q2WhBvvSEWgIwb98XeF9WH2rJsb4QtXQnXtHNiZFjmfxQ==
+       controls :
+        -
+          name : BTN_DrawScatter
+          identifier : 0x286fcf940683cd94
+          internal_properties : CAAAAAgAAABLU4jf0iKD3T5SxEl0FV0uOole6QUOVNY7wlsbWya3j42z4j3nbMW5SWOcf3uGwd+YdEQTAgxVSLjI7u5iskIYrA32Jj6C3SLiMQrwB8/z1fVj/6huznSDD3OoepOhlWaaRmA0Y4NQ7LfVbt60+yO9oGj+uQl7OVnqLZ93k27n0ypN27yBxVazFGID3S8nIMoVFnG7vNemYPtJZyHocHBbOxuJgUi3k1q6/pbAUctPnLOsyRTUxy0JHs+Md6qR6/g23YaqwjWPzddpAvuctXZvfdy8yQtnz+MG7SqsNMnpnq2ZJzZ5yZyB+xetxEp84nymPpmTxSE/OYi4JKv1F45qft/SMBBQLrZv7aKSbBNSyrYBYmQQE777K5QBO2UzDvsFhzJUS/Ma2PWtW1Wq+97fLMDBkdQGMNsArexfjjdZliHtrbKGRgCsLKGt2Cs20o4EIYAecDd3AZOj9Kh0OIxUIlKxp8AssQb6hJL3R2tQssKriFxDQ7u/Ze1r3wx/IXeNpRNY7+M0C2moYf2HK7V7uNrSTG+ogEsN37zYmw7Rqi3Pga+35bQjnZDulABFTQYXnFa+MJruSuxlmDRQ91ywMwAI/6/Uf3+JLeXPrloQKygSzRPEJzl9lo18TQmhJ3KOVpzXxu7KiuS3UpkDC9+kG4QF8Q+u51E2PYHRgzb6RWeA6KBE5HZUcANI1V8iIjz4qC7RVR9VSVWOUBziR5Y8AVnSZA1USu20PdSvh12H1EhBZy01gzkhWmvIUJTTw1GRPErosejACWB360dz/7OoUr1+t3GSAXuzRSpLUX7oODDnxZnRJPUVM6uomDhUJFDuzZowKw4RRMXYMS1SSpyUExMPzPvmdnErYduj1L8bPwMb6SEGIouGcyiQ6qhLgxHAGejoVA8=
+          properties :
+           x : 437
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAAD8HF5RPF8P5Kn9EM4Bz045MQEmdOUY0ah/+icyR/xxu42T2eYK0k25/ANsh5sKQzgJ/YUyX8Ly+5Hq5O5Tj73yLRH8cHrzaQI8BrmWadAINsuxvXR2655c5Cs/2K6yvqSpBD/dBqXiTS/tbOmlYaonQ4XIsu1GXDg0PR24Ps6Xn5HcVLJfS73LrNDXB7j9bB1bG7zVLybv2oDj5m2kJiS7ewGbq7B52poigtStmGZrJnlNTFEduUHIKsz/cnRZLUvTDFrBAf5NzUL1pMZI8lcQdMqEco+jpXpI0k0A2tuSG3ZhP0un0Qc5H43ftQCcKAQj9Ug5o+3ANiL7Nev0RETq+LBAIvE6Gwsd2oeJy0K5O7tcYzwF6H2nSliLlGezgDeERDo2ZcRYfq8y+v10l5S+S0ICiO8S77j9mrbdhyU8vNamsQ5On+nsQdtM/2h598ZFwCnTs0QBX3j9Bz/ajhZ7J8CG2u1+VTlxjcjqxkp2+T0Flj570OHZXDimAkcewBUOYvykZCOGQx2qQSkzW7Vh0l0T1kt/CgzQPVFVTbjiaoo5uV4cbU/sasKlDeqtHiDvN0zaVUbcNJxCZkawp3m4YW8h3HDKaiucg3eSDXoTghCNktXNx5M5Ang7hcnqSv/iSwD+xSbd1ExM0gyGvdsx6FTkL00EELArA1nVjHpu9UaCfmjOMkN6PYViGinjQ+byqC2yYuNx6hhgD1gikmt4u2TuqDVv+HtDBF+XHMLv+Ax0ZO/bIKp9S7lpsC5Yc4BGrkoU6yv44MM67QUpUPgesDgseAz4695x59GfOPQxBmPK2yjgWMKYD9F/akWOsHkahJUHR14PLjurxKT6Cgj3QwE0B5a3CxfwZhVcdL9iM5hGXi35/lCWqZR19MLb0sAnPzalFQeWje4rMJqVyLk/3xUNHRymfE5JOTq2sRXQWmhQeZnQ1wiGSGGXNWlchAepE64PbnhND1QAH00xFlsKP0dBP54S6M08CmHRIb+Q88oeVve+iKGNjX5qcmQO8/Dxew1SVr5aYg2O+GzJ+yJyc3xCwQlSFgtFeUlgcFjkIrVN+AMabE626jgjlqVIx/5bEnM/6Lwg4VD1/lcMFQOT3acULySbLOGFdVE6+6O8MtkEEzknHqTk6bKfRZNiPB6Ht6oD/hldr45qhi34OLmjFiHskozEdU9bPMqS82Uzlc1j9lDe8dcXfptOdgdknectUgmierVI78zXGnhaNM4xr1b8OhZ3u+2AYJMVX64fpCzcct9benQjPe8Ysw==
+              code : |1-
+               sChartName is string = "MyScatterChart"
+               
+               // Create the chart
+               grCreate(sChartName,grScatter) 
+               
+               // Configure the destination of the chart
+               grDestinationControl(sChartName,"WIN_Chart.IMG_Scatter")
+               
+               // Do we have to link the dots?
+               grScatterLinkPoint(sChartName,CBOX_Link)
+               
+               // Define the diameter of the dot
+               grScatterPointSize(sChartName,EDT_DiameterDots)
+               
+               // Font of the chart
+               grTitleFont(sChartName,"Arial",10,Black)
+               
+               SWITCH RADIO_TitlePosition
+               	CASE 1 // At the top
+               		
+               		// Title of the chart
+               		grTitle(sChartName,<§$0006§>,grAtTop)
+               		
+               	CASE 2 // At the bottom
+               		
+               		// Title of the chart
+               		grTitle(sChartName,<§$0006§>,grAtBottom)
+               		
+               	CASE 3 // No title
+               		// Title of the chart
+               		grTitle(sChartName,<§$0006§>,grNone)		
+               END
+               
+               SWITCH RADIO_LegendPosition
+               	CASE 1 // on the left
+               		// Position of the legend
+               		grLegend(sChartName,grAtLeft)
+               		
+               	CASE 2 // to the right
+               		
+               		// Position of the legend
+               		grLegend(sChartName,grAtRight)
+               		
+               	CASE 3 // Without legend
+               		
+               		// Position of the legend
+               		grLegend(sChartName,grNone)	
+               END
+               
+               
+               LOCAL
+               	i is int
+               	
+               FOR i = 1 TO 10
+               	
+               	// Add a data
+               	grAddData(sChartName,1,Random(-150,150))
+               	grAddData(sChartName,2,Random(-150,200))
+               	grAddData(sChartName,3,Random(1,250))
+               	
+               	// Legend of this value
+               	grCategoryLabel(sChartName,i,StringBuild(<§$0005§>,i))
+               	
+               END
+               
+               // Draw this chart
+               grDraw(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+        -
+          name : BTN_DeleteScatter
+          identifier : 0x286fcf940684cd94
+          internal_properties : CAAAAAgAAABvElCD1fzMYxSIDdOhibGFN4ixZ3hLSo8AWDtdiC94spLvpc4sjElON/PvJadrG4Try2L2w1azAn2GIFAKFV9OjOHgWmEoukUMJtFXwSy/ZGh7+F4vfTPW/41ET/WI6hikUSw6/pXnA+PttGE9/Vae3CIoFG1+A6AFwa/chUBSDBP3EM4A4gF7ZyvlzDyWQ2oHtlgwyhDYI6D99jR1oar2sU+5KBOoQZuAcqGY2js2xQSrK20aAfcdIxi8qKo8zxnicFsDUDsyTK/vDg6eJ4xMRHRODfx0U19m6QHKYV3yt0ftckDxRzglXaCRwvdJx/1acA+UYtFbdug702E8asTlkHshRgiOTOgGI3esVo8eAZ6+qwORRXo9FGRUfySdn6ysDe+jxHBtf9dPDnh1QlAWKkwEiFwfoJvUAljhIkHB7DPrH9hvHRB/m8aQXDcyeko13FWslsFLUQbBC9N9uvN/x35RTykEv2AvopuEsGflG3FjZhZoqzObMkvyErVX7NbiL7yXLchXyM/ZpyHLjk3J/gfd0f1bKxDraJqowW8bMqUwEuaLSmNE06myriTUucgjPaVvIm8Nlx7MxAq4FEIsD/tBlrld0sSTYB1p+mmqw8rfyk4M2Dj+IPwWKY+GRZ6s/cuAZrmN09BMDN2rrPWM32OOQFXX1DgCErthz0PEueeVxesGf/ktIszYe2/JZrbUBxHGp0yAtuM50HpqPj7Wqbw8cvDO0Efhq8uuXDkc0WODveco8Dze1dmvz1d1FF5wmIpASMbIFUUz69kbzWa/1kSjxd+RXIuVMgjqmqI916zaJkgSCzSO/6qmdua4Th5y1pUUTIPYMNtlcOgpm0KiveCAntqiPGAkwNad9/DfQFJ44f0PCODs1vwYt5BBfTk460ucyL5rzMV9
+          properties :
+           x : 538
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAAAi7ioP7gVKv6EwVBb94Zr5HU1RhUwGkr3lKj4WSZD1QtmkdtvKbFJkhDcJDArMFWloZNG32ibWGMsY6NqySqFAbCUWzuFXcP31Z7S3AQ7Meh9uBmx5RJLcTmmfCwiK5OcMRk9C5o3IbtpF4UuQ9Hvt6kzDbhMLGlB6tYSTbJZ0nXStxfBwFeQb88wKqsm28+qzfA5iKC8v52FBj64yyhD6xTrrplw+wWHKv87B5xqUL7uzM+o1Vb0IYrSTj73BNGdKPXZ5HrBv77qzHXRYze1u
+              code : |1-
+               sChartName is string = "MyScatterChart"
+               
+               // Delete the chart
+               grDeleteAll(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+        -
+          name : IMG_Scatter
+          identifier : 0x286fcf940685cd94
+          internal_properties : CAAAAAgAAAB1Wh6T5cNi+lRRVDta6O1zgrQSHwiVci1aRAnA7iRcv4r+LmiKdzvPgCKbqUPhjMN57OfLmmCFE6vGSIEF6lp2SqzdHsR+hsNsKKiKmR82EIadIDYCeLABZRoErD90E7ddSy0GPSN/cHhRc5wsuE1O6nuZZBE71x9RbXh3P2GWLy9K8s9dF4R+XZcJHcI7Lu4aOL0T5Qw8yalgGdrBuyoAjz11uSY6ZdS5z5WFJ4/8OgN4A96wnabXF+lKHLziV5oChCXxEgUSvIHLr87VRT7aUnIIEBVWBJXT0hat8Fq/yMDTiXQgheTLP4P2txN2o84EdQPBzBaJD01SeSOnq6wXSR3IvvhHOEPCJu2bzGO5UZUwDNJ6isTIzTmiRp2yTowK0iqMi4ltn/pTZZ1v6sZgSD65PujAfwv5u9DOjKc3X0Bt7Tr3Ixr27Tbdewo4m2zsnVs+yw5DS0ieWC7G84EruU62ZIN2jjWv7pV+R8UBOM+H35KBeR93+DgqreClQQb4mJEAzUz06odlhYQeO00PLRTJJ3RYqm2RgiR7osrvlabxi4KP2yEQlaZwIfFUYSQNwwlwB+rH2fEyIAVUcFygSa8vhV8QN8Z7JTNEW7m+R8zlaNx/ll5xBSlesZGw+nilIKBEVpvYLKIr9unEEs4TkbF45ht2iseNGncuAL8foBi9Ukd6BKx0yEJ9RwexWqlqwuM1xuCCjW+STxZXjZxDR/1l5JIPaSCwi4mImW8KBMwwRnwxQZuOGXj1zMaQ2ZuMdq/Tgq0Y2+qHl2twCQiXlSFD27xD4UWxeKFS1vDFGAVCT3TJ2jUt61Mde8E62H1jt5o2RcaMV/t89A==
+          properties :
+           x : 7
+           y : 36
+           width : 620
+           height : 357
+          type : 8
+          code_elements :
+           type_code : 8
+           p_codes :
+            -
+              code : |1-
+               
+              type : 18
+        -
+          name : CBOX_Link
+          identifier : 0x286fcf940686cd94
+          internal_properties : CAAAAAgAAABoZYLkE4VMxn+Sxgv55jpweRM4FzBPJwDG998+P9GBk5GWSbalzanwmf3z0Il6sqDwd8RZ/RewCHfFnVjoDg27eKFU0txUuXo0SWYteIkpS7QpaicDg4dH/UZpNUMUfsei4/gZNz0R5QRLiN94hDY3A5HPd5FPNvznWC3XF5PInVkBbtJgx6Pq24r/Jhx6tiGzPZznTrZhpLB0IRAJ/AfaP1KvQ/cLegavRl3kJVk+VnHtfKLxcj6uB2QVjDaKjCdSNK7h01hDhGenzZvO6JEgI5RbuTFA7ZGpn+b610V3MVItDdYZ5adL7icT92/kGvA5D1EP9fepyAxqimMh0kalAdCjaX08ooc1iDHfaSwVu7fLSoE9d+WfLOSGm4+6FwLsDScam0O9ZMukVZ8Zti2GZ8DOV5qksZfEIUTiRC158kaFjHotdHd3oP/K/qd9SK2ABv0tasvcI2OrDslCBRf8aju60EwhEYLI7S1u3bg16i4+jr6AeXOMemP9GFFNkqgSByChyOSvfdbBGaF0WsbWBtSVAeRLRzsPskBXsPQfvdhb8whPWrZws3G1adJ7FOuu/wMhTCHRPqR2SVhDLzyUtz1hieEouMnoanq1/IkujUqfs6v0wuL15x/b0UOgi36p6XP5OHQ6e4rhwPus7pBoeM4OJLaIgE8e/L7DnA4OG0lZJa2TMYqvz6SVaXHTf/SixIyV0gY9XF+FpJaVXWpcWAN2QFrk8O5zk1/YiB43GdcihPybuovNt++HjLEreqS8XA1I+hzZezHi9Xi4Pe4W2psZoUTFJm28IZ5G3t+zCy0Uh1UR7/RdMSGoLy01xy5Ur7l0YBf6vNsh87y78KkztlfSmakuF8jdHDCabSZb/U6yWfASrx2Tx0DDdLcMI9VN5vdaCc/M/wMrVfjzip+j7bgdworQiJ0itxWUezZ4cTT+cGB5SUv7oKue1ByESFHEnPlVow+XthdZf8M3ibWrMoSLKk5ZWKnqWeE=
+          properties :
+           x : 216
+           y : 439
+           width : 216
+           height : 26
+          options :
+           -
+             internal_properties : CAAAAAgAAAAldS2PeEaT+KMud/OLWbWegVr2ECLxzuxjMe2PtZ9X7VYOXJcmN814BXNU5rMr8cFfn4FLaPeUS3tB3Ceyfe15BlKnBDegKlwX3g86CixNavGOU0nwJoQUvw75x4qzYH25tUec3TrEqRtXT8WgUq4/rKIvk/XcboNnJsUeK4UGJEpn0Si9aYM9QWGz6gtSp1atRB1HHa/8HQ==
+          type : 5
+          controls : []
+          code_elements :
+           type_code : 5
+           p_codes :
+            -
+              code : |1+
+               MySelf = False
+              type : 14
+        -
+          name : EDT_DiameterDots
+          identifier : 0x286fcf940688cd94
+          internal_properties : CAAAAAgAAAC7+6BDWIbiwGhKDtipIewRfR1wxPOf+Ms7M0KfYCLXrK4icii1elNNHajFKwl2dUgKJye+JbEjdS8Hhog7jm7e/y/eKK6+lVyBK+Gj1ULEooXgaDeHMzqiXBpEL5JGcdSiw5JEAMhxtk3bHqp9ahXzU/agZPqumaWuJB5K1XMBhRTD4xhYlTMml/5h8GosKRGS6MEdyIi58nteXPrBA4UBQXyEHVqvU6Olg9RFZlqK6/WlGl0XEIJwRruE/RRueVUhXMODydWr2cLk5L4IAUvPyrOHxqWWBkI90s/I9G/rKw2acezBjjideki9PfgX/R7R69Z1EHVhAGJZGQEOkfyby/GlLgeKkxkZ3xtSTUlENsgY9/GtENE8EcyW0tNfTbgIaZIt7QqLCYkSNhzpXyWjqwrZDgkUZalUVhp0zOrle8C96PSDeEKEGuGD+2TJSS5OfGT/qIMIlm6BGHEAHpO482Js3ArNmM4kEBbJIWsQECYxDRQGMxsIIu56wnOj9L/oQ2mMfsXso8OPAPdi7ORNP7koyKpcLDfBm8ZceIB7XdW0U0zQrc83XNQSagHyVC0wuhJjEOt5syXaMRyZhgQOhGv933aq3r6X1w3P/0z8C4C1OllwxaIX14rklTtz/HxJYGa/U9Z2MIVOr6gWN+C5dki4y68ZJrw6O5GyACQzToUb3hKk/13ob/vCIHM+O7mMu3OSCqvv1Nw0+NX+qzG8oD0O5ZgJdOadpksjvSHPmvj/tCpV3KdsK0K5ujZLTrtfEEfXZn2l1TOl2OFM1a2w4RQE0fkmpwRtbZWHI+xsTaDKh6eTQ+J8atIcIdHsYB9LLwuVxOmTfxkkcSxHgZ12Vye765fJ3RhPvqWFyJzair+QrU+urRFKQxnxwNtc+p6xiJRRGyPG2gLVhjHxvZGbHZ9xRPtpRlSzwRCqcDlwDHDH0OT1XyCaUy3AxwL4wX50WUZvMySdsydCm+6ZpLeJCeUW866X3RsvkhYcmzDIfyIpslQ9faEy92jmCu4mB0EVoOnZidwlwd+gLAkdKuDsH3Zk7HBkE0z1sSENIUfWFeQSiHu3FfScgro9Cuf005TMOOmnKYnQL7Szy9aEwA7qEuHTFe7o2gh19XjbGyoRYEsq3JS9fYfCYIvM6fGLztD5GhYh
+          properties :
+           x : 15
+           y : 438
+           width : 149
+           height : 22
+          type : 2
+          code_elements :
+           type_code : 3
+           p_codes :
+            -
+              code : |1+
+               MySelf = 4
+              type : 14
+            -
+              type : 276
+              enabled : false
+            -
+              type : 277
+              enabled : false
+            -
+              type : 278
+              enabled : false
+        -
+          name : STC_Pixels
+          identifier : 0x286fcf940689cd94
+          internal_properties : CAAAAAgAAAC4zcQn+bIniRZkiEL4TvWZHSd/eDWICIBtebj4omMALMkme0WnxRiqYWXAUoxXT2f9nSMd3VDqXqkNYmOCWARDbwOLn8+neSosnC+pys+BaTvskb+bWszwdAdzTr2G0ACiHIW89IXwIzXSVgrstKCvYVB3HmOB1nPCNRZIk58T9UT2yUBNgDoyPSx24+jwEukVX8J/9IaBZxDTrb0AfHziw6XyHFhD162wZYnLqoDJ+U+XZ5+Lqw2quTx4IVHILd3X0ORgtvKEp4NL2ZlHfv1Lev6rESjK3l0ZlLI+XmzCmWRyLM8ttW57n61eNhbMcCmwv59addoqxGpHSuXNr0VD+zYsQ+pNWH1kVGHR4OEfiS74LgoqQmB2fro5OmJZAINfYpOXMwK/6J+RJOSXrKEHWLgwhhk1e1lP+OKsFBRKMCNtYS/efwU1Yy6eswosrbI=
+          properties :
+           x : 166
+           y : 442
+           width : 33
+           height : 15
+          type : 3
+          code_elements :
+           type_code : 2
+           p_codes : []
+     -
+       internal_properties : CAAAAAgAAADXXnDOOFhk7ZndZivqh2CM0qlaNrcdaROxqHFjba/1gxqGXK7oueBpBaf3FhigBJKKZYc7ZcUbmYRz0HMg0z0J1RwISuv2u7YCsnLnt5Lr1S2smkWdkONjfVgB2iOR6xnhttwC65zb1XfUC3njERkTTD5TL7jEvp336Yx74QpvuwxBP+EYow==
+       controls :
+        -
+          name : BTN_DrawLine
+          identifier : 0x286fcf94068bcd94
+          internal_properties : CAAAAAgAAACIX5xuiD40yoaFoacBBMDyV0z83+bG6Cdn6WHQuSyj8zjXN8/DiUxwRVro2Mp2msWy2oPZPZyMVPPOjoqmcQXETCwLxyOl6dR7fUgwAVxp9ut468rKaPTqIlNiWCosWoisIziofyjQ1Ayg18BWTrXUQGZu5RizOPJc1NW+etFMp+LYtIDkSa9i5b2n8MSdl9XMMQcI/fj1iI71DzWH/ivbBpba+kRfS6XAP4psKWeY4VV3bTk+L6ZpGl/0VAwSDk7lI3IXuude/4uf87I4EqsaLaxAsmI354nz3ODv5AzaY5In1AtmnSQEWWaGF1JoWAqe+qQOQEUUJ4+iYYaALSYTDPHC6TPHk9cQLuC50eXJrldATGc24N7mEReB7D+0N0lEqr95nfDKyzWiCMxkazgaX7ZJkOgtB1B8eIvOI+tmWQTg6NOOWwoS8VqRtEDMsZ2H08xb7uwiK7YQBmf3Ka1VCCwi9aPCKrtKh92poQbEyUSJCCckFIqai+DVuPw28k6BvoTRaIkIWmqq0SUkowqTmvEK/SbCSpp7ehNwPsrEcl/dnWbKcvG6xS6xzwroXpBuhH88PSeEQI07K6BMwM9tqTDJOQ3KRysxmb+42zFxWmM46AsgH2N0LNbYIj55tujDyLjbZ8HRejAi6VFjre9xrPY91sJBAU+jsro8tz5xmGuNqRIEwarEM6Lx6RaDTM7bwluGgcLKA0LQodjBz+fLO080BiMScAK6C3W9FSCnQytWraRwfjXi/lTTrJAVASVJyrPr/HohBp8ePWBemnZqw+EdHdikDcsIF6nC6AzUcFgzvJe0lmcbujx+wMK1engWjYTpNkm8Ne4BvfbhnTMTDtSnX5UncYVwk9KnsVJYZJJTyL7KQl9IH61ZZmYk88cXbINw
+          properties :
+           x : 437
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAAD8dzgPWTfeCbjrwBqjEmWCLtDTxBVn41k54IBRHBjGayxeFYXX8ltYQk2byFkth0unh+RdLvB3EsaZQlB01fFbIxYFLQIoWOI0+SUDdX+oHTtyA3IosmSKLzId9IKfZipO0ZTRC5V0jzJN2lY/ArQv4L++n9i/ZZ0r7RyUQbnByZydQEYODNUHrBPEGUYqPmlGIYYDOgA5DRAxKxE5rDx/t5OnA/YmxLTmQi+m7OGEPWQLr63/Aw++hDnDJruyMKhxLiWKRnqvvosbCBboQqNVIcC8Uj2Vy0AAGSpXohWUFUIfnFUw6KpofsmCywBiYzcWFL8yEfx/zM1xVf1VkTxME9xoXnymdpOG+49kwvMmEGktwRntO5smgeU8XyniNLi3Xs1IRJ85bWd4+07v4KmzULCf5ksIvh5Ilkrrt1vLNACzSnG3PR4vvxKDRQdr/BIerwzSdhuV/L42rXNrre5Pko7VfheOcSSN9q8Lw2+9tH/KVxw90pCDJGz8jbNbzHsmB5YDw67lD+8i5bEovz56g8NL29TgURWwQXbjqXUvo1ozPjmiYdYuonKmdIvTQOEuXufhkE/k8rOZPFBibxjGCcDpFgzW25U2NUGv3u0m/eTih/FsWuSgbW4xv0Evi1okORd7ssYLKSf8e0aSL1ANsRHuIVDBfkFvrSrEi61OECE3FSziAnMtiZu59gC3I8JwG7oYgVo4qIh7gCM5Qw3TAsq8weF2xAcPeEAEv9WQmOiOPMQAAX0zIJEJS7YpCX4gZAzcxlGQWDl6PEF8DJl3tv9/CJaP75d+wQCOJrmMI2US6Tq0NOw4XESOwIfNrQCExzbHPCe1MvHANYke0Ej0szr1+Yoa17SkDLfWG8Gi0mKcYgJF4uBesj2u/J7uL4jw9IdZSUsxoedKTMryN5Wxv4B77hPEN1LsuUUnfc5ALkhTHwTdbpbNcLZSdv0zf07+U//5ATGqw5plQvhm99Zq34f4+nMp9C704PAJiD5GWt2AtEWylVZYZTeB9LoXLRe4vaKKVfTl+GS71nH0IpWXBc/22/eBANvP8EfwIDNPo1TIaz/3a11dGMcVIT4E7hUiuHIgkVquLZJxOkD3LeCKfNAEM/UFvu1jx33PGZkhSBzphuReZcJ/UuQVVeUd1el4
+              code : |1-
+               sChartName is string = <§$0003§>
+               
+               // Create the chart
+               grCreate(sChartName,grCurve)
+               
+               // Configure the destination of the chart
+               grDestinationControl(sChartName,"WIN_Chart.IMG_Line")
+               
+               // Font of the chart
+               grTitleFont(sChartName,"Arial",10,Black)
+               
+               SWITCH RADIO_TitlePosition
+               	CASE 1 // At the top
+               		
+               		// Title of the chart
+               		grTitle(sChartName,<§$0004§>,grAtTop)
+               		
+               	CASE 2 // At the bottom
+               		
+               		// Title of the chart
+               		grTitle(sChartName,<§$0004§>,grAtBottom)
+               		
+               	CASE 3 // No title
+               		// Title of the chart
+               		grTitle(sChartName,<§$0004§>,grNone)		
+               END
+               
+               SWITCH RADIO_LegendPosition
+               	CASE 1 // on the left
+               		// Position of the legend
+               		grLegend(sChartName,grAtLeft)
+               		
+               	CASE 2 // to the right
+               		
+               		// Position of the legend
+               		grLegend(sChartName,grAtRight)
+               		
+               	CASE 3 // Without legend
+               		
+               		// Position of the legend
+               		grLegend(sChartName,grNone)	
+               END
+               
+               
+               LOCAL
+               	i is int
+               	
+               FOR i = 1 TO 10
+               	
+               	// Add a data
+               	grAddData(sChartName,1,Random(-150,150))
+               	grAddData(sChartName,2,Random(-150,200))
+               	grAddData(sChartName,3,Random(0,250))
+               	
+               	// Legend of this value
+               	grCategoryLabel(sChartName,i,StringBuild(<§$0005§>,i))
+               	
+               END
+               
+               // Draw this chart
+               grDraw(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+        -
+          name : BTN_DeleteLine
+          identifier : 0x286fcf94068ccd94
+          internal_properties : CAAAAAgAAAB8I614EmmzzmP9AEbKopLkVOkSwIm8hT7TiYoO45IT7/UanNVfF9o/JP7sJm66Ak22ukmldvEk+4KJwX2lSHoLj8yzjfD/u6LRRQ5IZJfimRtuo42SSCy/bEiNvKhrXaUnRE9BoeN5tQfzpgfHFyKKJHS6imtsffo983WKVxKKNAshiriKHK3Wn7t9PEQWS3KPJihQgigw29jVtpwV+ZoWQbehkNPI0asAQukIIptufRxb220yic+lO3DMELrEP6kSKDM7sIuyzN8vli62R/RErCQefSScu0cuMfHSQZUSd2elKriBJ/gVfcA50n8pXxUiEL/UGskDjpATo3n8shSVsCMp7pg+zPi2Ez9cbv92SeaOG9PpjRJVjEy0V/QVH3z8FScbBKBd/0fPBlgd4jjuYny0yMQH2PPsanhZQpkB/BMDpxDvHVCPa9aYTH/yspKdrDVMPv2HpQK9N2/RThdbuwI1YwVgm2QLrveQhPspx+U3mjok9w8vnhfOftk7kJKWYyCLyRSTjMsFcx3fUkEFMivxNTkH1xQnNLbUNdMfLsmE5qpHlj+I32W+Woh4zQT3cRkj/kvpq3poYKYcqDa4sx9FauVpXrgvHFmFzo2OL44jrmL4BPRy7KiiJZP6eeqggU8EAtWZR4zYmEnf0LnYAxfClAFDQPz+LmeNM/co1Zs5uT/SS0XB/ji0J9NtWrL4O6VK02iser+lLFYO0gLyXTg1v8s7OQb4eNrPo4IF2MZMhOgX8cFtrO52AJY2hXkXxbWd03N7vjawdECGOoNu/wks9BJWJ8yeL6kJ/Q9uqglLi9PxBLPH+I9HhcHlS92LiybDxxjrxVAG/ZuYFDudvu35FWUPL00F5Y80So2ojwOpkky+WT9Nd135lrcqCkQl2LgvOwO2mZaO
+          properties :
+           x : 538
+           y : 439
+           width : 95
+           height : 26
+          type : 4
+          code_elements :
+           type_code : 4
+           p_codes :
+            -
+              internal_properties : CAAAAAgAAABQPNh9fDMkbVNGCtxDM8jX62M/42Ik/NuHyBzsV4rbqNeqjCHIalxihjUPCgjeA//e8kcloNQAJgXWBkAozNdm8gO8ZFc1EttXRUpNz2C6UAV89FJXOrSiOEeFod7Eoi0qJFUYzHJnUoBCPzW62h0TsIqBIG3xBLqQm/plPqRmk0r7m6rK88Z9EapoFHMcFYjREpTskoV5sT9vvXjEWIJoU0j5qF48w2PIvczD4RCeNaGZKeRPc98qQNKxqZfnDr0gC0QraG4hIehhSwYqGx8c
+              code : |1-
+               sChartName is string = "MyLineChart"
+               // Delete the chart
+               grDeleteAll(sChartName)
+              type : 18
+            -
+              type : 161
+              enabled : false
+        -
+          name : IMG_Line
+          identifier : 0x286fcf94068dcd94
+          internal_properties : CAAAAAgAAABnd2YqGtdKMQowRHBkvgZhikXlQmuVHYfkJU41NnjudanFEjL+MYV3fd4Ax0gg154k05NiJRtOxH46ctCYY9tP9qkqSayc66YATMOR4GgVVa3V/Uy5iYq3TIo78uax+3ac09JM1U7Ccj9ciGXiZUqaGb96HSl89Km1INU8xOex7YM0dDX2ADMFTIJQCLMPzikmRTdSa73bItp8jOOksW8jR8OuBHbCX1vYeE8zBKu0g6sL51Peo7J4yPSypPogSnXRiCxWd7Ih3lp+2akeqzV+tEwS85Y4Taap4TV/X+35cg5F58cdKnBnWMKTBJUTvekaIz6xSQpiqigXEweybIDMRYuTFG32Qrq/3zPXnf0ywz3NVdoQwqytdaBEkE17PgRaJ+XWLUUBU1dQbL8r0jWKPlg7Je8y18mdkW3t7eB3mtWzUIFkcDX9FOa6NkjmUXpiTZIRsCeLpp4QFLXlsbi8ff6flhLCf8FYEWnes2g8EQV/As/I/Z+D73vqYRCzhllWmFajIEl7W4dhfTpC1yXLyi7DkIdEJllL6GPXm5l4Q+0swUwmbkjSKytJ+pXgE/UsWEVyReCuQExZpI5FFmVvCOo/PSFzy+eQaVfB9LDzwATIjiClBQl2mpO73DZ+tLS380sEdh2qKw+ECNT4B1wATkfKtfuE+cv5vVn27m/WGQx+PXPS5z+M87jkx6GEdhQCvaJWqQhwwgl8eK8eBB/qoXt4E43yGkzSSQ4dsvYHED6Ms3AFzdo90wKuMwBy31Jw8unGMQkhCrBAs12eII2Kp5hmTmsXGp8oyH1VR/w366XYcpNbfVDtq1NgbkqSmQZWdzRD6kNPha8=
+          properties :
+           x : 7
+           y : 36
+           width : 620
+           height : 357
+          type : 8
+          code_elements :
+           type_code : 8
+           p_codes :
+            -
+              code : |1-
+               
+              type : 18
+    type : 16
+    controls : []
+    code_elements :
+     type_code : 24
+     p_codes :
+      -
+        type : 292
+        enabled : false
+      -
+        type : 293
+        enabled : false
+  -
+    name : STC_GeneralOptions
+    identifier : 0x286fcf94068ecd94
+    internal_properties : CAAAAAgAAADVRUPBgIFIPzlsDy8Q5OEIeTKpY4ElK3u6n7glGnyqJS7kRqfQWBT6noWXvU4muTtN4ppSMndxJV792AsC5xGowslcdEllC0Gmf2CMYu6qUcKH7zQjj/7uc8BKPDvUgCRxCxcHoI3RN/3DsYyiOuqfwMccPcjulgjcFNaZWPK9k6E7zO1vILQRP8JX5+ss1dGZJBdU40X++PVYlQukFXW5dR+zYGclne2K/6+bZwmWpg8Xq3iOewZVg/CwOCiMFbW0gRPciUq+9SnFC92Mj7tAKE+Fxcl0bOZaoIj1gGxOYMawQOmY+0a2iyGo1Y5LtUsqGGGnYl9JBniDhuMBQ8XS4SIcBjV9zMvv1CzxI7S02c6TA96Zo4kPVdlT
+    properties :
+     x : 650
+     y : 16
+     width : 144
+     height : 197
+    type : 3
+    code_elements :
+     type_code : 2
+     p_codes : []
+  -
+    name : RADIO_TitlePosition
+    identifier : 0x286fcf94068fcd94
+    internal_properties : CAAAAAgAAADFgeJlPc9vjybAltgHiq4bFCy5Icu32GsD/wMDOlRRxD6o0LYCor7SObhqrUMMxFlwR9bAbrKu3Y1GrlBBSxcj2kgqxVNQsTtB7eNKU0axRb1nxFROZ4j3EfLqjp1RFsqgOxZ2tdY0CEMf8hOtx8PCzeKBAB1uWBc5epXOMueGKRJVgM7eVpgsntXyiBIWXR0RB08RtvN7x1Pc2MUXEpJTRl2nX5tdZYHQl4uEJyYG+oh8OHyXdLuMnioUqBJ/uNHdHSg2YSh0uLVg1k67F8Mt4Rpo2gtwIerMYPeQ/VVZzNlB73K5XXV9TV1ZQW8PGarpaxOENSOhypD0K3oQlgK8ST4pRJ+AQcAmuDpWSMaeXm6PZ7snhNAwdWPFNa4DfPcL5GRbLRNZb1go36DImw7iyvqdqj8qxCR2Y1Xn9pPFVN56wMLsD1xC3eP1uu1Y7GgQrMDqiHV0bNbr1KHp5yMPVtwgZjgsnzXb0hFs4zkLf1icLZmwrJXossFflsRPkavvpua37o80qFS6Kg2EP5r+M0B8uYLDr56/+G5hBKgN78u8UJ0sOcL72niuljEoYaX3v2mNkHOb1EXuktDjlrep5HZft9fF05pIiWcMKkARpFESGhIpzBgLNB0uMV/i5wtYfJyVaIz9wc+k2yQVfpfgVZ2JG/CSwWLZxhVhIs1HWd/8wAEEekURY+6oKAnZOml8AMFhjmzVAhlb6mKhY8AB296EchTOno4n89HuRibz35HMvhOeEhhGYQOUzt5OR9baqE1RK1mXO+LGtKlUiSA0QU7sLM2ZOD71TAbXdxQ1Gy/A2GeJyvkSK6aOPMIoTc1wXKMJtH5LPJvm/2k21Zj7tnJjVHgJypk6+hueb0pH3f4GRgppR8cP4udAWMjjMhKRQmcXp/fhi17bR6e9WTJIMLfb432T31ue8LxV2sW6EwIsRHsJaA77JG/9HrcDuqFzdw79LT7VghlRiHrbzWPekKX4vjBF4XUAAKCHjfHF1sc30Z0gr7fYCuwk
+    properties :
+     x : 657
+     y : 40
+     width : 130
+     height : 75
+    options :
+     -
+       internal_properties : CAAAAAgAAACtRgFqkDql233Np1E43vURN1EZM/DLeGMUYVv6pDmobZ/vLqKzuc55JMK9qMLaxeaoLysPuz5hzdgfteTF0FTUfmYZjuuUmCg3P4vU7pvD+uR12Vg7KDgyElxWNMw6Zhv+0DHaWl6QdfH4Zm5uXS+Ib0DesGyfLa36evGiJg==
+     -
+       internal_properties : CAAAAAgAAAAsR1ihL/W4odtyFFXdgDO+h/Z4jOjW3SXYxJ4jIGTdOuewMJhLalm8SFzbux14aVCtvIbBtA6QxaQpE0p88TRTGnAIX2EuPh1KNPetBLF13CZ1egfLcpbFR5t61dyUTLXAcMhdLkhGKDo5D3SX8r5hNdUXAxmgTfWccPDyh9myo7MdLQ==
+     -
+       internal_properties : CAAAAAgAAACNZqFKsNy7/8EYEkA+xvBqMRPOswi73AfW+J3iXEEsA3OtTky3J+Zl8IiHPKZubXyQqQMBrwilRWiRJ/SVoEMzn2c2Q0Ij8Y1YEgZ9YSpCeW0eam0q57kHx4slpd8pcSbzfQqUvpLMvaH4zQ3T44adpq4fqMZzAc3ampHCBg==
+    type : 6
+    controls : []
+    code_elements :
+     type_code : 6
+     p_codes : []
+  -
+    name : RADIO_LegendPosition
+    identifier : 0x286fcf940693cd94
+    internal_properties : CAAAAAgAAACod+6Lka1py5/0YrxgBjr7CycY3rOaq7y3eJFOAcp1z68Z88NkiOItgeTLApAniI+ip9XDlJFFxZVNOIKReFNC65QAmIWR3dYcT3G+Hpbs8+28JvurUoyr1ptOELzWhqLpraT8zlRXLKV4icHiGmpIAhwvaoxmuBffkQT55htvDiVkOVBVMo6/970KKfQwyQQvdudJMLo28b1jzapfQcWkAfa2OyPXoLt+KNYzsKo69vAAdei9cUkytueCgeWJ6jJjlmuBnKs4eOFyArnDL0i7tWpZBhhb3IG2fsSLuxmzBcPNqQXp/TBt71y2M9tOCkv6Gkp2zhrNBTjYr9orLaxTsr/wgfLxey39M6LrHbtkn3GKnn2M9g8x04C4umh1qa8bLBJd8mHoFKCnF80v8r6S7qfM18orY8rI2/QDptBFNDd7mlqp4KRwI5MKp6E4alZZxS+cK/4merU1mce2X9KGMDxtlGuymW7Zl3IHf9t8o8meJVd61MCkb7Q6SRqVxpkkmoaQG47AN2Oviy7ayeRw4Rh0twPSfxANBvqY1+Hd3+lF7ETyw6dFV7vBabx954id6jE89+0Whvl1YnLtuyCIzunSY7xVzCpMDFp09svdNRjU9osbcPGiicnLqk/GCDLX6Motb0W4I9TlNZkDg7Y6u/i4pdjsMXOZVgYRRbsiKSEuR6gysil3gy79TYQoFhUlGSjsIbFZOQVIkSg+XYPXK+4e8R/eIyJGcISUhPlLjo6gI+DjjvNhw7aO8BUgw732rVw2qWdln34g9CLnzxnL/7GAlu572LNemVFpd8NpmIMDStQzp98HqSNCxzWt8mRhU4U5eCn0kXF9SGs12/jsI8Y6AzoBZU1BhcfhpCWTSU+YleT8tNE45EsiW6Xuko5WLUZoyQwOStMAxau4V2y8rkQdhu6h/AQ2aMRtzP9ZYwKLViqaSBPBnVvc1G4Rojmjrebsl5IxSOpUujkuVO2ixAsShQZHP/OAkTIfQoOSQqx/wQ+49bbWgkichjma
+    properties :
+     x : 657
+     y : 132
+     width : 130
+     height : 75
+    options :
+     -
+       internal_properties : CAAAAAgAAAA2SnKDxaKxiLHvTRK1yQ0JxCFUJ/A+x0MAUAvcZyEYhSSxF+au2hhYIimViK/N+DJFsPVVpv05s8Y6evuI8TQznJTq3iBsoZUJoqd6KDgeQ55PCBDsyB+3HvGMqEiDyYwQMhpXki3w//yk4OEoVwUICYk0eRBK4U4fyDLU2OG5ug==
+     -
+       internal_properties : CAAAAAgAAADHkhWIRl9UBj0U3W+iUh2XIEvOPBYiV+3i0GBzYr55mdfkWEyzWrWoYNhHO534/dCd2NZl3AY0KfRNn0LEaUDDyu6iOQtIFEPoynnH1stz5ggbfHlF/BxLxRmUx8aWYs+KTsqyRXNjF+XOsgHm67NA7g/s+Wl+lmx4dADftIILeujKQg==
+     -
+       internal_properties : CAAAAAgAAAAux4DrEabf2EIhtR2OkBFuToNtT+LRmLdlY2ta5MkY/W/vfrJzyW5ZZHKdGGK6BcZoX+uPS96R3egXlYTF8KSkrrbJ5qPc4ADPh3McxtMbQqztkRBzsMCqqiT+fATyvuM2ePmgh4ffJCB5paGOjoZ7DPdrsdQmsi57+3IhpQ==
+    type : 6
+    controls : []
+    code_elements :
+     type_code : 6
+     p_codes : []
+  -
+    name : IMG_Image1
+    identifier : 0x286fcf940697cd94
+    internal_properties : CAAAAAgAAACGQuj0PCUDkXSJGy1liFRLTCN670mz8H1BzzN6tpdLSPUanhb6sD8GUZqenQah4/4vm+SRdxQjEourBGV6VE3LAc0y3f42s3n9wKfl/Nto5QAeWpuuuHx5lAFp765DIEc0iVBPuTG1zKEFex2Pdaj7zwBv8JZW9awOWmwSuHGIsmm7I1WtH+3OX0EG9lDpwdyjqmdCnEJ0bPHAirUT8VCbYo8eZZUpOwnDmUw6DgF6BtXxPLZiGUNk1NfpHAyky350kUjhpQOYoXv80jomZ0pEKJrS7yHx1juh1tVsnr/NxVaIaN6eGNEUG11UKChL/z6uPB8Q1JDV7j6ydpzBdNIaM7YiQhhuM3kEmX9SuZiShWc8xUDwPA3qghYehyPAUSOyBLh+ZHOIRDJWam8B+v54aqgHv1Ep2PUGTORaPWVTtdNea1Zhyd5auJcoj6MJPcXMUIa6mBgcfO46sTuvgXNTVfAqihH5yfITYSWukIuN6CsakrwGhLiKRpNQEZaietkbOLsJBMu/XnRNVXYajKPJw2MU7KI+pAy+6CJ5NOLmEoxdnrBe0Pg18w0iXLqdmboEHtoiyLJp6BywSvr0D9vITLg1jpCSd5/T10XQPCLqjkCa1Yo1wyClsdCaDp4QY5fxRIisxkacUlP+zg7VdDGh+Lqk6OPQbqZspaSIUquSpvwOdbi4UvusjuRI/GVoQ9ClZJgd424DwgJK/ssVYEYgA6SQwqqLSnZ+46Btel6/y6qoHH0Oan7tvKw8hgcK/Dxmhv0t37rBbxPzF5gmwPUfQQnxX3TEADxHJMho0jIrV4SgF8hqWujj2n7a3uuLSB++CZLar2KT3V05hPkIdfrH7nXSun1n4OBCC6pwlB+ZvbN3
+    properties :
+     x : 649
+     y : 216
+     width : 80
+     height : 80
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes : []
+  -
+    name : IMG_Image2
+    identifier : 0x286fcf940698cd94
+    internal_properties : CAAAAAgAAACcnPEE/6RLV1WPjzz30Z+usc9Py2n2bhJKseAEz0vvMfic91UX8IT2dOrY3wLITwac4Aip4he7natVWZvSdLtIjC8hOI3n5qlsFnQSXNsBPLnOKdPQhNYP9+PBG41kq40rF/ehB0xYA/S65UYFg4JQqs3q/SEdKq7byGMCFfK9Ubu6c/Rk19Q1ZkKGNVY/AD0CsGgn9IAS1azVvV0xgqrvT1ZcK6EgFHdQ6bU1fXp4ztuuH2/xigH+ygGdJj+VvdPbA7OfcTtg80I60JtfTwp691z81s06v24w/8nptkuxkyeiLMh18vAStets1TEqsneh4d6w388Z1jXaAO1WcsLARfDGPT62wx2uDKUTqfTQxHSc38y8wDpDJiRu+l0Qc/UgEZFkgWs4TQSFidMVrPdM+iD/XvZqFRaOPgKMiQH37J2mRMf8vZ6Nmjv+YgUwjnAVaOzpDQWDAhsLaUuICw1R4kf9Mw2qEND23nHtEF3ShSUBMY0GVkQsmZmJeTA/txK0GHSv5CyCxpz1ig2732U07YCgdSUpR/YskOMibWwqG8pRFHEIqYllgLXCRR3Oie/cx7PsbbXgkLZmChDYGKL0bUtySjmPDrEqAOnVLrVJnK2ExG/a6rENDOqB3h57I4rKlieeD4Kvz2Fg6dR0PoOKzfapC3WtSPSIqrnrc0OM9w+26yTva4zkzCq6jiTkc5YEpZQUHLcXKeL+kRGBH1wk99QbiLjf2LC7msAZJUS+nqVHFEctHcv6RORdP3V5VyoSpN+kkxW2Zt158sTK27XeYJ7LzIfjsBE3dg7WbpJs7IyKvSkNmTK5WvtDQaflbezvAU6b6a4mPjJfIcj+Zzecs/DVL63m3iwV50XnGKPYztbgeMGKYOc=
+    properties :
+     x : 719
+     y : 259
+     width : 80
+     height : 80
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes : []
+  -
+    name : IMG_Image3
+    identifier : 0x286fcf940699cd94
+    internal_properties : CAAAAAgAAAB6Cs66W4p+0azw9DMdedYcMlnLCL8K+jn8cpu0IPMCZmkMV2EOs+JHMS9lV5OZbvnaci4LPXx0PhmWuSKeUU+mqZWCzydhd12CpaqqH0TWlRUnE5aLACgTra9ZEKfuddPip9L5tb3mkXp46wVRdcxt8hCIRuLw+TQGVV6rHNFjYNqqxAiJA6h8XPenPJePHEKjFlXgqD6hEatH6MOsOzwxFiMdBQhc050wvOAQBRzPX4TLLoJQjJvMsjDMx4ThNL7W4X9Yo2Icb2A//3HgxNfA8i1irroGJQ65of2PO+x/8IHCCnv2DS1tMx/+mKlTP25GZpv3pJSBaxuxN1LfLJwa4pk5gvxUy6leHtgSW8l3SsPh7q+JTm0KuDRivnu6zBm/s0j7H81mT4/1TASSRIDvAq5KtyVNpzb18oC8WEoxAmuLXMjhuJzGNd668XKHEELOvUAdlh6GUJD6CZAXq95ic7nIP0yBIN5YPyxGsqm8yTm55QajnXykem9UKyggfITcY7KNVXLr3lqP/8aYpGAJQw9woCcWaBsfvRylmCLvUGgnQAOW9WycuHIDlObgeT2oZraFVQRgoADqP0MvJea1clFGzXRjK9LJcdycCQnAExP9Hm/KB21TkAr3pF/1t9p4+h7pnEW2DqujRc9PN6G1HKw0ktm65Hd29y6IDXuxsj5ef1ffHFM5FhrHNACVp+9CAbMtOjtXypSMSBDPNtaKrPU3Otvme6GbxQ0fKmz5rRVKx5WLwS1h1xGPm1g3qCsN3ZEUv2xAxTOP3BwxbQx/1QFu+ZH+5z8GopM2E/IV9fXdLFhFAqMVM+hrHFDMMsgn/Lu9MHDRauKWToxcMcdSfHW+rtoKSb4Ct6bTlnuga/uGDaDBEZQ40g==
+    properties :
+     x : 644
+     y : 323
+     width : 80
+     height : 80
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes : []
+  -
+    name : IMG_Image4
+    identifier : 0x286fcf94069acd94
+    internal_properties : CAAAAAgAAADT07fTRO3VOBULZ7CSDlWZv3Zg9RyxHfQ5bWblwZwFx3p9wCL/Svn2ktq49EC2LbqHMwP4IiNXtc41CKcTFhrzBmLTiMgw9szD0PW3xNG1FmKIAIswlwuGMi7okQN+wGJxFmFohGrv5tFhBExoXJ08wY/fdfGp4m19AsuSq4Dww/mVQ1cA6IGlO+ws59ryaZmOVdSnLx+SPnp0XWY3PonMIVIsNGeNfBLXwaW7qPf4iu/GZQlX9WyV+Y2pkueEkcVBaAZXqhtVlI9QoNSrt6DvTSjpZcEff3SMahKC0uesJ7hVdR5dtm7agkijP7waCLHJ1WJmt0XuxB522EUmH/2hQcDExQOJ/P4dC3HJBrDw5f5o1ZbkN8LPA3kTCQr1rTxufpumxuZH/L7juJ425j4r8vDqX8HHHwhVqvxW9HynBueJFBiJPlhcrbrqX9MWt22dViE6q7sRqfdXVnEwck3lnmZ9CGW283tbUL2bz5xXRFZybqEW4gfFhzCV9rP1bdO5DOsQAI/e389o6MnboQlQBEQlZ27PJ1RAmnkUD6tgH7XQ+aYR8meFpUNEX6lN9jC5c7McvB1/DUH3TGIO1lMAPxmdRu1q1H2E3Lf5rtSfTArUJYjDDpY6a/ViMSwYqm/PsQWSxZwvyfYeQNSUUqwii3Ozs5p5xVZxksk18kYML11dvshI68RooTViUSVQAiQ5WBpW41KA9SM757Fo7bmPs9wuE9zlHAAaZCw4QyNgtjzRXu4MwE5A1jAuAr/AEbKSmhYvgiELPui04QckKpmq/sqnYEiHXuSLJ5g5Hvd+PFp6sdPIB74euG3w59shdxOQhcycZzlIs8tvB/vDSiw1QbJjCX2v9Ot/NCNeGfgt9mRvZseoauuRew==
+    properties :
+     x : 719
+     y : 361
+     width : 80
+     height : 80
+    type : 8
+    code_elements :
+     type_code : 8
+     p_codes : []
+ menu :
+  name : _Menu
+  identifier : 0x28296cb487d29262
+  internal_properties : CAAAAAgAAACCv199ARoPUfG3WAPSG9eefhOOjWMQrs8CrX6cGGGJPoSHWBq4PXhStOWc1YnAZMZ5+EFR1WTDn8CTOTiyLnXPpAR5X8rsRkPZrm1yZeYDDt4kRzDPLbUf4Sh/mD3kd1D8V2drCFLmjeQhgpw7GKGwHRga+ZdjSqXGIC3LD1RracZ230hOmUJTj+ABDW4IHrw4PflmVGgp8E9KnAf/gselRrzEY90l3Cr9N00QijFYYrbrl4qF4kdim1YX6jYT4ezQhbJsU84ENZsxzq+o0JVHYQ8rxck600VhGV04/ao=
+  options : []
+ languages :
+  - en-GB
+ popup_menus : []
+ message_bar :
+  internal_properties : CAAAAAgAAACBtiNRiGxa0kA76WkY1EQ3DfPmGZEtwZcluEDgfUor02+ydyNImlfh95EEh7jMVpO72XNq5+WSgirFVdpNguKuj3Gm1g2QgJRwVPy+T/AYHwWu9stlxksuB0jA
+ actionbar : {}
+ code_elements :
+  internal_properties : CAAAAAgAAAAqLR3dVg4OZiNNvVD31cUgldR9Da+zPbhuYb110yIc/wCHYEP4aMDnSp+spEqBAqkNNhO2JxfA4ksLCU9How+N6NY1zg==
+  type_code : 1
+  p_codes :
+   -
+     code : |1-
+      
+   -
+     code : |1-
+      
+     type : 34
+   -
+     type : 180
+     enabled : false
+   -
+     type : 230
+     enabled : false
+   -
+     code : |1-
+      
+     type : 2
+   -
+     code : |1-
+      
+     type : 11
+   -
+     code : |1-
+      
+     type : 12
+   -
+     code : |1-
+      
+     type : 17
+   -
+     code : |1-
+      
+     type : 13
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : FenGraphe
+resources :
+ string_res :
+  identifier : 0x41b859a9008ac863
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : MyBarChart
+     index : 0
+   -
+     text :
+      en-GB : This is a bar chart
+     index : 1
+   -
+     text :
+      en-GB : "Bar #%1"
+     index : 2
+   -
+     text :
+      en-GB : MyLineChart
+     index : 3
+   -
+     text :
+      en-GB : This is a line chart
+     index : 4
+   -
+     text :
+      en-GB : "Series #%1"
+     index : 5
+   -
+     text :
+      en-GB : This is a scatter chart
+     index : 6
+custom_note :
+ internal_properties : CAAAAAgAAAC68/W0/adbG0nFCRhrE42B5HRnbDzVHaz86sSQyxlBk7I=
+rad :
+ internal_properties : CAAAAAgAAABoAN7PLpwJW3EiA7WVZdCA5EwrCA1rvutcDHooMWKe

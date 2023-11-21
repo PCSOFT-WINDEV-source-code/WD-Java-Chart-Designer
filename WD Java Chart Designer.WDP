@@ -1,0 +1,97 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : WD Java Chart Designer
+ major_version : 28
+ minor_version : 0
+ type : 4097
+ description : ""
+ subtype : 0
+project :
+ identifier : 0x0
+ internal_properties : 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
+ configurations :
+  -
+    name : WD Java Chart Designer
+    internal_properties : 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
+    configuration_id : 17269987259369537561
+    type : 8
+    version : {}
+    language : 2
+    new_features_help :
+     name : ""
+     internal_properties : CAAAAAgAAACjf8AKsdKT9zePpnEhy1MQ63F6x5y3Zzo9g3sBTtSDfQPaDyZPh27+WyjDNVJZJTFHe0VQKHpc7jakoA==
+ elements :
+  identifier : 0x4ac3800601d0cc2d
+  elements :
+   -
+     name : cChart
+     identifier : 0x4754159600035f83
+     internal_properties : CAAAAAgAAABQroiUE0jg+0dOIiMl7uDzPq8lPZns6JdSijRuNM1HiUuL/3I7haBcJBuFczOtVUu1vQ==
+     physical_name : .\cChart.WDC
+     type : 4
+   -
+     name : cLine
+     identifier : 0x4754159500025da0
+     internal_properties : CAAAAAgAAAC1kZ2BPhsTzJqBYe4Q6vmc37gqirp0ZJRWfc4/DBWBb02jKVhAuN0b515YoGCQaFigoA==
+     physical_name : .\cLine.wdc
+     type : 4
+   -
+     name : JavaChartDesigner
+     identifier : 0x47541597000563d7
+     internal_properties : CAAAAAgAAAC7l+MnhMFpcnx320S+iV9+oRwIqE7h4+/4KSJ3obBiTqoGhvuiHkeFHQT++ro2wjaepg==
+     physical_name : .\JavaChartDesigner.wdg
+     type : 7
+   -
+     name : cColumnchart
+     identifier : 0x4754159600046270
+     internal_properties : CAAAAAgAAACimJqOPWpCXWUggA3304K5bBNrowX2fmyKuMVxw36eeoKsPkNpV366Rv3n0VGPa12nrw==
+     physical_name : .\cColumnchart.wdc
+     type : 4
+   -
+     name : WIN_Chart
+     identifier : 0x47541b0e0000bcdf
+     internal_properties : CAAAAAgAAADeRDbq2YauQQkE1HGLaHY17J3rI78a1zBK5KW0Yv8d+wUtudjFM1KOatHLNf3zjwHLSw==
+     physical_name : .\WIN_Chart.wdw
+     type : 2
+  other_elements :
+   -
+     physical_name : .\description.gif
+  net_assemblies : []
+  uwp_api : []
+  external_components : []
+  internal_components : []
+ report_and_queries_enabled : false
+ common_generation_directory : true
+ languages :
+  - en-GB
+ wd_style_sheet : ".\\WD Java Chart Designer - Source.sty\r\n.\\WD Java Chart Designer.sty"
+ wb_style_sheet : .\WD Java Chart Designer - Source.wws
+ code_elements :
+  internal_properties : CAAAAAgAAADeFveEMyNrYwwCchYmNIPP9Kpow2CCwcYM4nnyO2Fa/7Po/mynd7VvYmDjok48mL7NXw6vxrm28bC7uEDlIlG8/XBslQBStQ==
+  type_code : 0
+  p_codes :
+   -
+     type : 196621
+   -
+     type : 196627
+     enabled : false
+  orphans :
+   -
+     name : WD Java Chart Designer
+     identifier : 0x4ac3800701d8cd26
+     code_elements :
+      type_code : 159
+      p_codes : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+rad :
+ internal_properties : CAAAAAgAAABhIL0UXeZmxDJxY3Xy0Q==
+project_explorer :
+ explorer_type : project
+resources :
+ string_res :
+  identifier : 0x0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAAAd98VSJfHHqE3P0QHwrwdhn7ig8dWBR6valpUTgnAMTVXiDg==

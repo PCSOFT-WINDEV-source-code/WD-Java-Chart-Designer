@@ -1,0 +1,794 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : JavaChartDesigner
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x186fcf970368d891
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAABuQJNCk2ZozQ+Ix+7Qu+q7g7+UO0dFxP96dS5X6RsgfFz27WQXFZKmrgHIkTzxLNd+byGnZcZhpu+0jraA0EbS79756XPWB8Y=
+  type_code : 31
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAADwI6Z9ew42drO3AuUlb4fenZ8BS8o88tFmkipSQFTsZpTUxFS75ma2aAta9EbSF3v0PlGL8oq/9yUmDzCpy5p7veOUgTbdVo54UV/olsGo0AR+8LYKUR6M4zu7ueHNAQwjj2WugHJFXsQw8BDouOHlFbcKnz3csDbWNI9ZOutmSMBR4YDoer0LarFJVIH9xr/7CaxVCVqCTCi0a255ZczSJLvG395UQzUKb/PJZi9GlNrKV+QBluUGW0rCiZ4JW+ml4UEVyyZmhZS4ybLMlcX93c1J2B5BdCzifZYyCVVArUPPCO5ugCaJJkgVR0PzdUdph15pprudF6CvMpGYFQOqa0DyXh0sVgmgI+2naKyIzqxPVPdmWufPEM9lX5UqVzaMQ1px5GtBHyxVB8wnLGaBn2OcOLTJ4XIKuIiPzl1T5JF4BQ+ptFnXdgeJcwVwf99LFYBmd6EYz7KGjCe5BzIfHRNE0O4DMeUaADSA1IsZTcH3Y2EsYuLr9MYq+1gmRes/xMPrAflaNTPE/fcWj68b4RawPl6axwGc9aI8L3HzQJuVbzbevGLjcoUwEE7jcTdSu4E4tOYLqfqoRDOQK2/VlG/SYRA0BLVDaJLCBZgS5gzyJu7lOJO//9lRu6ZKb/s2IS8+lC+imydlGgf8jqyzy/7iyEn48HQmwpEGZ9KfQ3/MfLPtHpl152Rn7qKK64nREm9Dtw==
+     code : |1+
+      CONSTANT
+      	
+      	// Constants representing the type of chart to create
+      	// These constants have the same values as the WLanguage constants
+      	grColumn = 1
+      	grCurve = 2
+      	grScatter = 5
+      	
+      	// These constants affect the position of the title and the position of the legend
+      	grNone = 0
+      	grAtBottom = 4
+      	grAtTop = 3
+      	grAtLeft = 2
+      	grAtRight = 1
+      END
+      
+      
+      // This structure is used to manage several charts at the same time
+      STChartType is Structure
+      	sChartName is string			// Name of the chart
+      	pclChart is object dynamic		// The Corresponding object (CHistogram,cLine,cScatter)	
+      END
+      
+      garrChartList is array dynamic of STChartType		// Array containing the different created charts
+      
+      
+      PRIVATE
+      gsError is string
+     type : 720896
+   -
+     code : |1-
+      
+      // Free the charts
+      i is int
+      
+      FOR i = 1 _TO_ Dimension(garrChartList)
+      	
+      	// Check the object (to make sure that it is not null)
+      	IF garrChartList[i]:pclChart <> Null
+      		
+      		// The object is not null
+      		// Free the Chart object
+      		delete garrChartList[i]:pclChart
+      		
+      	END
+      END
+      
+      // Delete all the charts
+      ArrayDeleteAll(garrChartList)
+     type : 720898
+  procedures :
+   -
+     name : grCreate
+     internal_properties : CAAAAAgAAAADHJRKSvW3+WRy4APcuyGqoQ4F3vHl6Mp/J7HA95MW3j4iy4ahEKW8zbaD/wtj0rYfFyuqDFj8p6+9BkJrvdfdfCXjRyl8oLVDCIiMFQqpdyxI7HGmRCn5A/aCREGK9bto3twVq0tbfFSRQxFaz8kQPOkSSisim7ULDNUiAccQfRTQgow3edGy9cfIa5pG94IodcoOFHGH4kHxLMZUmKM2cmfS6ltRJq+Inf0XzMOp/x83a0Zf/Bzejg3ym0V1ZApMyDmeeh1JUK6NAj5UJW1LgVSflwWVkg70UytyFnwEVa8JHaIAQPubjDpoNzM9Bvr0tldgw0+wJVWTv8dZ7bktrHbKxTOfEGdgxBIJP7RcnlwdVOytwnPSzjMDxs2jt905CNuW4Gt2luO2nWB9Yw5agu2hBtdEfFyUzm9CrMCTUB4lWGmDWOsoK1w+0D7qZSE7ismVnv8RksH4LyabqtgwpG3o3iPbxbQmForTyYeMNNOFgnCE
+     procedure_id : 1760854226829432977
+     type_code : 15
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] grCreate (<sChartName>, <nType>)
+      //
+      // Parameters:
+      //	sChartName: Name of the chart that must be created
+      //	nType: Type of the chart (grColumn,grCurve,grScatter)
+      // Return value:
+      // 	boolean:    True if the function was successful, False otherwise
+      
+      PROCEDURE grCreate(sChartName,nType)
+      
+      
+      // Local variables
+      nSubscript is int		// Subscript of the chart in the array
+      nAdd is int		// Subscript to which the chart was added
+      
+      
+      //
+      // See the documentation for grCreate
+      //
+      
+      
+      //--------------------------------------------
+      // Check the parameters
+      //--------------------------------------------
+      
+      // Check the name of the chart
+      
+      IF sChartName ~= "" THEN
+      	gsError = <§@41b859715e99ef780000§>
+      	RESULT False
+      END
+      
+      
+      // Check the type of the chart
+      // The type of the chart must correspond to one of the supported types
+      // Return False in all the other cases	
+      SWITCH nType
+      	CASE grColumn,grCurve,grScatter
+      		// The parameter is correct		
+      	// Continue
+      	OTHER CASE
+      		
+      		gsError = <§@41b859715e99ef780001§> + CR + <§@41b859715e99ef780002§>
+      		RESULT False
+      END
+      
+      
+      //--------------------------------------------
+      // Find the chart in the array
+      //--------------------------------------------
+      nSubscript = FindChart(sChartName)
+      IF nSubscript <> -1 THEN
+      	gsError = <§@41b859715e99ef780003§>
+      	grDeleteAll(sChartName)
+      	
+      END
+      
+      // Add an element to the array
+      // and retrieve its subscript
+      nAdd = ArrayAdd(garrChartList)
+      
+      // Update the information of this chart
+      garrChartList[nAdd]:sChartName = sChartName
+      
+      // Allocate the proper object according to the requested type of chart
+      SWITCH nType
+      	CASE grColumn
+      		garrChartList[nAdd]:pclChart = new cColumnchart()
+      	CASE grCurve
+      		garrChartList[nAdd]:pclChart = new cLine()
+      	CASE grScatter	
+      		// Allocate the cLine by passing True to make a scatter
+      		garrChartList[nAdd]:pclChart = new cLine(True)	
+      END
+      
+      
+      RESULT True
+     type : 458752
+   -
+     name : GetError
+     procedure_id : 1760854226829498513
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] GetError ()
+      //
+      // This function returns the caption of the last error
+      // Parameters:
+      //	None
+      // Return value:
+      // 	string: Caption of the last error
+      
+      PROCEDURE GetError()
+      
+      RESULT gsError
+     type : 458752
+   -
+     name : grAddData
+     internal_properties : CAAAAAgAAABJnvFRxVsYnPB/zbVVptf14lvrZc485PJ8yGjuSXMmnBELbkxzUpi8VT27uRdHfwEAi2xJHoZl3Zom4R4lhu15UF7FoePHimNJGylThLW9qv2RbVKWe2AxQ9zKgM6g1Kn/N5ZJM7kFsljXLBnW8PSJ6cKP05xFbWl3A1W9QzdXXgccJEAtVmjb6GIhLxXyY2dVtP8oUXziUCiW7C+mWlb2zw9a+pTbkSAZK53Snpcmp80UHf33U8llR/a51gBYRus0jzUj4KuK8HqKghE8RpI8yFQnzisTsQBTBIUsrHUZnLYyozA7qDzPWFA2X5vejK0E+K63oQpPGDAa44MhASflBp5iRk39zvcCM2SZ+LTwpe/lMkQ5zEzfz/kjLbZX+I/evT14cTpy68E=
+     procedure_id : 1760854226829564049
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grAddData (<sChartName>, <nSeries>, <nValue> [, <nSubscript>])
+      //
+      // Used to add a data to the chart
+      // Parameters:
+      //	sChartName: Name of the chart for which the data must be added
+      //	nSeries: Number of the series for which the data must be added
+      //	nValue: Value that must be added
+      //	nSubscript (default value=-1): Subscript to which the value must be added
+      // Return value:
+      // 	boolean:  True if the function was successful, False otherwise
+      
+      PROCEDURE grAddData(sChartName,nSeries,nValue,nSubscript = -1)
+      
+      nChartSubscript is int
+      
+      
+      nChartSubscript = FindChart(sChartName)
+      IF nChartSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the pointer
+      IF garrChartList[nChartSubscript]:pclChart = Null THEN
+      	gsError = <§@41b859715e99ef780004§>
+      	RESULT False
+      END
+      
+      // Add the data => Call the corresponding method
+      garrChartList[nChartSubscript]:pclChart:AddData(nValue,nSubscript,nSeries)
+      
+      
+      RESULT True
+     type : 458752
+   -
+     name : grDestinationControl
+     internal_properties : CAAAAAgAAACtnD5yFLO+mdaXF8XZ+pmpPD+ZhLac2OXGZE1ok5PwJF0OyiBIOC72w9BZbbJFfm5TEromk9nAxy0HL3ViTazTVFfrZzVQVhnUYS2YnAM1Yy4Qn7Wyzu57fJWDz9lU6HQoN5IQed9Z6+WDOhJfx9TevMl1bgec5tcigt/WLARKbzPPXNlHJqAXOlD4wQ7DyasgaS6/GiLV3h9Ve549MaxA4M6Bcoo1+PLQKEuzCBCAxyTmlkd/xuuEcY7cR/ATYzlIZHpyLakf48gwEJKgJvKpc8yT1XkzjA68dvo5hJTR/7j1TCEgsC/PITXLFG9hr1Gi1kT/pL8lTdWZf1Pzd510Stjc6666a8UUUH8dXVmFMCHABAXvfZ2uyqyATGW48icilYSRAtX9hLB+TIm+ALo=
+     procedure_id : 1760854226829629585
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grDestinationControl (<sChartName>, <sControlName>)
+      //
+      // Parameters:
+      //	sChartName: Name of the chart
+      //	sControlName: Name of the control prefixed by the name of the window where the chart must be drawn
+      // Return value:
+      // 	boolean:    True if the function was successful, False otherwise
+      
+      PROCEDURE grDestinationControl(sChartName, sControlName)
+      
+      
+      nSubscript is int					// Subscript of the chart in the array
+      
+      // Search for the name of the chart
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the existence of the image control
+      IF ControlExist(sControlName) THEN
+      	
+      	// Check the pointer
+      	IF garrChartList[nSubscript]:pclChart = Null THEN
+      		gsError = <§@41b859715e99ef780004§>
+      		RESULT False
+      	END
+      	
+      	// Store the control associated with the chart found
+      	garrChartList[nSubscript]:pclChart:ImageControl(Upper(sControlName))
+      	
+      	
+      ELSE
+      	
+      	gsError = StringBuild(<§@41b859715e99ef780005§>,sControlName)
+      	
+      	RESULT False
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : FindChart
+     procedure_id : 1760854226829695121
+     type_code : 15
+     code : |1-
+      // This method can be called either from another method
+      // to search for a chart from its name
+      // Or by the event branched on the image control
+      // Syntax:
+      //[ <Result> = ] FindChart (<sChartName> [, <sControlName>])
+      //
+      // Parameters:
+      //	sChartName: Name of the chart to find
+      //	sControlName (default value=""): Name of the control to find
+      // Return value:
+      // 	integer:  Subscript of the chart found or -1 if no chart was found
+      
+      PROCEDURE PRIVATE FindChart(sChartName, sControlName = "")
+      
+      nSubscript is int				// Browse subscript
+      bFound is boolean = False		// True if the chart was found, False otherwise (by default, the chart is not found)
+      
+      // Check the name of the control
+      IF sControlName <> "" THEN
+      	// The name of the control is empty
+      	
+      	// Browse the array of charts
+      	FOR nSubscript = 1 _TO_ Dimension(garrChartList)
+      		
+      		// Check the Chart object
+      		IF garrChartList[nSubscript]:pclChart <> Null THEN
+      			
+      			// Compare the names of the controls (strict equality as supported => All in uppercase characters) 
+      			IF sControlName = garrChartList[nSubscript]:pclChart:ImageControl() THEN
+      				// The corresponding chart was found
+      				// reset the variable to true
+      				bFound = True
+      				// exit the loop
+      				BREAK			
+      			END
+      			
+      		END	
+      	END
+      	// Return -1 if not found
+      	IF NOT bFound THEN
+      		
+      		nSubscript = -1
+      		
+      	END
+      ELSE
+      	// The name of the control is not specified, search according to the name of the chart	
+      	
+      	// Find the name of the chart in the array
+      	nSubscript = ArraySeek(garrChartList,asLinear,"sChartName",sChartName)
+      	
+      	IF nSubscript = -1 THEN
+      		gsError = <§@41b859715e99ef780006§>
+      	END
+      	
+      END
+      
+      // Returns the subscript of the array
+      RESULT nSubscript
+     type : 458752
+   -
+     name : grDraw
+     internal_properties : CAAAAAgAAAAnYh8SDD6lfoODJqA62oEh9g5t5o02KgnDuLSV6uFZiZGT3Up76vzR/WRkHmZoSKvfXMKfP3O5S4lvK66ddhPf3EOnIxolauq3vAbGgBDkA8NJ8kDIKFFnQ+Wkqzdlo5NOJkll5aATuu31LZzLwFhNnkxhvhebvCJXGi+RMwWkKFb4GOzvafkXDd81s+r8PxAglmECk7JLPHJoW5TXjxpT0etVCLcVAeOn3/xSIBKLP9pB/fYM1MzxT/B/dEiWy4pJY5VLWKAXcgboTe2VtjQzqO7hD7Tjn6Vb5topyPavVezkv2oHBWauupDBb+31K51WBCNK0Mh6m3xHYpL4w7oh6Dp5rCMTTguGOSsBplUImi9w0LNdoSFDdswBtJJKpvJj
+     procedure_id : 1760854226829760657
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grDraw (<sChartName>)
+      //
+      // Parameters:
+      //	sChartName: name of the chart to draw
+      // Return value:
+      // 	boolean: True if the function was successful, False otherwise
+      
+      PROCEDURE grDraw(sChartName)
+      
+      // Search for the chart
+      nSubscript is int
+      
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Draws the corresponding chart
+      	// Call the drawing method
+      	garrChartList[nSubscript]:pclChart:Draw()
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grTitle
+     internal_properties : CAAAAAgAAABm21m9ReGBXvrnNMzxy5hqpP91rO7Lhq5UpxNv1kY136QtcGzaVXlrv0cVvPcZ8lsi5P9tMpWg453fde+1PEjjhqetyc3X0vud7GxXK+cmw75GVqysYclGmN5sAUHQpHIia0WBDoxvVg327kBMqcopEeh+mKSsH0+M/eQdQ43tnJA3unCcJs2QzsM/5ImY+g/uIPtYFeJLATnsJ7liX4K3Jjeel77bpKdUfiUYnTy8YPrVaplfb5IiubcwFr3hJTSHYmfsfD0ewtNiVuvc74pl2Ezbs3PdZfoTYh8d3vi5CW5xae68xgIBCynCVmVyXZiIV44Rd6ATbkF9ff5U2Z6ZU2Rz9buNzyql9LqsCClLcwbcFPv2SSBxNt0OWN3K
+     procedure_id : 1760854226829826193
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grTitle (<sChartName>, <sTitle>, <nPosition>)
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	sTitle: Title of the chart
+      //	nPosition: Position of the title (grAtTop, grAtBottom, grNone)
+      // Return value:
+      // 	boolean: True if the function was successful, False otherwise
+      
+      PROCEDURE grTitle(sChartName,sTitle,nPosition)
+      
+      
+      //--------------------------------------
+      //	CHECK THE PARAMETERS
+      //--------------------------------------
+      
+      // Find the chart in the array
+      nSubscript is int
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      
+      IF sTitle ~= "" AND nPosition <> grNone THEN
+      	gsError = <§@41b859715e99ef780007§>
+      	RESULT False
+      END
+      
+      
+      // According to the position
+      // Accept the correct positions only
+      // Return False for all the other ones
+      SWITCH nPosition
+      
+      	CASE grNone,grAtTop,grAtBottom
+      		// The parameter is correct, we continue
+      		
+      	OTHER CASE 
+      		gsError = <§@41b859715e99ef780008§>
+      		RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Assign the title via the SetTitle method
+      	garrChartList[nSubscript]:pclChart:SetTitle(sTitle,nPosition)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grTitleFont
+     internal_properties : CAAAAAgAAABMjXeZS19Ib/GU7z6ckzlfhYK3UypJSpKF0+Awz+ZILtEx70ultuftEIMGlrZ+S0sqt3FZ0pg2lAVJ15vBgpnOBFjZqwRU+/DtNkgcgn0jl35MB8feB0CsyEYn2eLhMZiAEttBoe3QTLQl8ukxcHpfq8oTBuejlqoLBeZZO6yYwZEvqJWQC4zinmJZnf3K4cnbl96QszlrvkaZrISnO6j+s4wIa/L2uIJX4V/EsnRAP8cTLkMPsdE4uV+InmNh801Q0VrZ++kidosXMd0XLCvjSk+lutqy3g3FLWZ5pGeElej0p63TdZ5EZzrdDHtNYie+hVddI8uI41eT3FRmT5QV1j8MS3fZtPbx+QuRdILnO0UmPJW3VwcFNywfpOHUlzS+hqD1u0mVtA==
+     procedure_id : 1760854226829891729
+     type_code : 15
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] grTitleFont (<sChartName>, <sFontName>, <nSize>[, <nColor>])
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	sFontName: Name of the font that will be used for the title
+      //	nSize: Size of the font
+      //	nColor: Color of the text
+      // Return value:
+      // 	boolean:  True if the function was successful, False otherwise
+      
+      PROCEDURE grTitleFont(sChartName,sFontName,nSize,nColor=Black)
+      
+      // Search for the chart
+      nSubscript is int
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Update the title font
+      	garrChartList[nSubscript]:pclChart:FontTitle(sFontName,nSize,nColor)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grLegend
+     internal_properties : CAAAAAgAAADJlGHMfsBPRL1x8EIsFFMZB/wHmQqkMqaPdK/Us8/PQRxv/cu7pFBz5YYGqN1qOpWlbtjvdPKjIRuRXdDFuekjeBBvdMbbFQmmmIjoa2XMljwZ7/bGvMWHNuaJt58J//O453A/C/BLSiHLeg5ZyjUnP+ojTIMkOmhkhDlTbghPoDu2Je1vV4KzS0fS3D090XRBQHsnvUORfm50Fidyw8H+nR/2+oDcqnyzyehJOetecIaBCnWD88iP+Y7FlgQ4gjy1070jjES66pM/bmLyDww5VYSjvvKPtU9srmuK2UxJPA+BTOhDvVKORkDxqgdNb23qPHtW2zW16uFSdQn3g5pFz1/m5XukEk+qCljCirajdy/WMul7ww8xYOYrQmCc1JyN
+     procedure_id : 1760854226829957265
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grLegend (<sChartName>, <nPosition>)
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	nPosition: Position of the legend (grAtTop, grAtBottom, grNone)
+      // Return value:
+      // 	boolean: True if the function was successful, False otherwise
+      
+      PROCEDURE grLegend(sChartName,nPosition)
+      
+      
+      nSubscript is int
+      
+      // Search for the chart
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      
+      // Check the position
+      // Accept the valid positions only
+      // Return False in all the other cases
+      SWITCH nPosition
+      	CASE grAtLeft, grAtRight, grNone
+      	// The position is correct, no action
+      	OTHER CASE 
+      		
+      		gsError = <§@41b859715e99ef780009§>
+      		RESULT False
+      		
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Position the legend
+      	garrChartList[nSubscript]:pclChart:Legend(nPosition)
+      	
+      END
+      
+      
+      RESULT True
+     type : 458752
+   -
+     name : grCategoryLabel
+     internal_properties : CAAAAAgAAAAJlnTLtXkVQeA9UXOtPwCgt/KjSYyiCvCsbViBmcK48kN6ljzae7T5gRCK2j7h0x+I4CukzZr4UdcW8aMHSwty89r78nXwDcULXZlC1nMKyBut+FUITJZ1pBf2V04+JC6oscq2y1YeJsGaSX0Ppdx3KnY6UtVOzCOG9OaDzCj3D2HmiRYoUpefrCGBL5PdTUOQY+Lm4vdw4ZpbkK5wBM8DaKw0cu0z57BspcS0mcHcQ6qKD586aXJNy7q62PO4mRxPWjn7U2j2eiT7f0190uEc0K2cLsXgSzWQIXZa1uy46PjwJgP4GVz6sS6ng3d/9gD44+bprKBOctlYj4hHJRrx3ruebSIhLG5+tffKcynMx8Oz3GllxJxXGAHE84uUafRIbHghBNiYZT5l0Gjmb6bnDg8QCvxQP95Cv6tbs8igpRF4nEsW/8JpHrcE46vXuAxtNrZ+4cTtYYMWmCcOwHTWhb60O4GOA8R8QqozrzDc2Tw59IFFbLtPW+75lVDy8JajwvrlJpxFKwB6sV/Uew0A+AWeZoMKCHmZ4ng7HlHGl8mQvVp6OaO8/U3AUiq1bv0=
+     procedure_id : 1760854226830022801
+     type_code : 15
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] grCategoryLabel (<sChartName>, <nSeriesSubscript>, <sString>)
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	nSeriesSubscript: Subscript of the relevant series (line and scatter) or the relevant subscript (histogram)
+      //	sString: String that must be displayed
+      // Return value:
+      // 	boolean:  True if the function was successful, False otherwise
+      
+      PROCEDURE grCategoryLabel(sChartName, nSeriesSubscript, sString)
+      
+      
+      
+      nSubscript is int
+      
+      // Search for the chart
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Add the legend via the AddLegend method
+      	garrChartList[nSubscript]:pclChart:AddLegend(nSeriesSubscript,sString)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grScatterLinkPoint
+     internal_properties : CAAAAAgAAAAAd+Xhh47KBRxWbqqI9P0WFWeN1BRGmUvajb+ILTe3ptMDlD7RQOg0hWQ4VMLrkEtplbEiahyr0OmQw83GdynDLpcXvZY5LH1Di13CgrNWVLSZQapNZ8wRSrJ2alcU1OroHw2PPpApfgqddnyNh2Z8XXvus6t80TLFwzSmYZWBWFcQt/DHEpdV6RqC2cEt8iY1eBXC278Yh1HEh4F2TbxdcMHAXZoBrnn6RbEHTJ2ZC0nNsqTO/fq2vBqLf3ZusD2uQdP/xXv1nC4/o34Uv4BsTkzf8zyYI41VQrWALc0CUIbKlcs1/CGbE8Q2q6v2KGLJhHvJoX7E0ffqPTbBju4AObLaf+8/Dtf+YtGLYBMYyE7h2PPqp0VAHTVgV0QIhhv5eJCH8WQe/qYdhMR7LA==
+     procedure_id : 1760854226830088337
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grScatterLinkPoint (<sChartName>, <bLink>)
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	bLink: Will the dots be linked
+      // Return value:
+      // 	boolean: True if the function was successful, False otherwise
+      
+      PROCEDURE grScatterLinkPoint(sChartName,bLink)
+      
+      
+      // Search for the chart
+      nSubscript is int
+      
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Assigns the value of LinkDot
+      	garrChartList[nSubscript]:pclChart:LinkDot(bLink)	
+      END
+      
+      
+      RESULT True
+     type : 458752
+   -
+     name : grScatterPointSize
+     internal_properties : CAAAAAgAAACgG13kBJ1PMr8gSLkbjLiBucak7vmCTcAUTyqH3gwNaxRFqkGUb2Pu5WVpRMrhOAUbpq8JdljVZtp0xiEJMWxemoH4P6L5fi4yYpHgEfJbdbf59wzEY0UuwFAALYk58e/CHOMfuGg+Or6BiawxbRfz5cYGfwU9SHpgXNTAxqZDhk2QUzzUKA5yB78jKyLA2nAyk5BhYrqhbc3N5xodNlTTMJB3C3kL88fO9gvCserhhf/oBIUgRIQ7e6Q+LVLM35g5mxU0wYDtrx+/GmKCka1Bt0yflkCvZeTcUqxSDYtzsSfeIYwlU4c2trSPfTd+u+SqJN+K3IwLP6XTvZGHEOJXF9gQS+4zWebQfSKgtCE2XjOQnFVpAmCDEJGvFpreJYpJRRGVnQVoWFq3ebLT6uG1pA==
+     procedure_id : 1760854226830153873
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grScatterPointSize (<sChartName>, <nDotSize>)
+      //
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	ndotSize: Radius of the dot that must be displayed
+      // Return value:
+      // 	boolean:  True if the function was successful, False otherwise
+      
+      PROCEDURE grScatterPointSize(sChartName,nDotSize)
+      
+      
+      
+      // Search for the chart
+      nSubscript is int
+      
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Assign the size of the dot
+      	garrChartList[nSubscript]:pclChart:DotSize(nDotSize)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grSeriesColor
+     internal_properties : CAAAAAgAAABHAUpp/NdXAS2F2qH2E4PweFc/8aVHPathMhBh+dCAuh2jn+SjOSzyDVpGwkFII/8lu+TMHyAdCs4qrbSA6/U3VnycdbFvlnO2gjHg7/TKj4k+HyXIq3mZ4j6W6rmxyez0eqbmoF2DTF1RzCEQWjLforFkw1qdp2/F+6rwyz0+bwC/n76M4YwufaQnYqTnEiC854gpWB4nWeX0IN+nudYn2TAk1lcxYqGwZ86iOO5iaT4n2ATrIaODg6Aul1ljiaDdBl9Rzj/ph8uCKJfDn/C3prONIjilEq0cEn0E8VDJhXYTcyLySveKDbry6/JHdnzG2xiVbMdCP+NiMiP8kLyNDU3QhXEqrcIUuFBh0f+oRJQfGp9q9fZMtTMNG03AdOGxNoGd4+0ckAO6mwA=
+     procedure_id : 1760854226830219409
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grSeriesColor (<sChartName>, <nSeries>, <nColor>)
+      //
+      // Used to modify the color of a series
+      
+      // Parameters:
+      //	sChartName: Name of the relevant chart
+      //	nSeries: Number of the series to modify
+      //	nColor: Color that must be displayed
+      // Return value:
+      // 	boolean:  True if the function was successful, False otherwise.
+      
+      PROCEDURE grSeriesColor(sChartName,nSeries,nColor)
+      
+      // Search for the chart
+      nSubscript is int
+      
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Assigns the color to the series
+      	garrChartList[nSubscript]:pclChart:SeriesColor(nSeries,nColor)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grIncreaseData
+     internal_properties : CAAAAAgAAAAWoyoosZQ0Ztly5VvqRkfJwce2RxFu22AJZiQILrX4W9SW1AijtDhF7ZXWG1tICWcgr83gfIDK9X6YZv4aWR7i29KPjUjyhTdgz85dcDmdJRfsXtx7PjHSCl+SE3CsX8RrRguvP55g8psrAqZTfb3wDq9wKhLOuYcLLzFb0ZITVMFwLwaEWW6O1TkOpi63RGV3OKh/MOyWHebwRpoqAc39+ut1g6ndmDh2vgcFg9gWnWSp86BVvwbB4IvmZAzmO5srCSoABZ7MIH9wxqrCkjhbxqv8KjBz2v3Mx0QNdZk/XMmOnb6PfUe3HmtEC+hKBkRQ/x1UKJJpNM5iyOjJf+tPNiCfZK1jeuQPP2b+1QYeB4Gl3J1rkYy3dAYd8tfDUSCQKeNPopDaTvVVpGE5DZtG+a60q/aOfxEzanzfAVNzH4aBapdhlrOcoZTmC6du/NiUj4IdIAB8Zn3aC7xy9ous5QMoiv2kQYnXB23R2+Shov2QRlQ9PzJ7LvMS0eqQNRZpDWoqHH1CW7RsK1scVEDdf+h4hyViHoQ9ApDwAAvfSJHox4jDsvC70/HkyXJHk+moL6b9EcyPaZRpVAeTgzdFqT2v3psN/49OTHUqwch4f2ZFjgL7y/jLR9UMswCCavAvk3VXvnGzS/++X3sRrMYRVJsXcjebWbxAjc1zhEXgsA5JyTOnaOgAJsgptmXLboAdjKZrL20BGCTOKZVFq6jtCXb7zA==
+     procedure_id : 1760854226830284945
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grIncreaseData (<sChartName>, <nSubscript>[, <nValue>[, <nSeries>]])
+      //
+      // Parameters:
+      //	sChartName: sChartName
+      //	nSubscript: Subscript that must be modified
+      //	nValue: Value that must be added
+      //	nSeries: Number of the series (1 by default)
+      // Return value:
+      // 	boolean:   True if the function was successful, False otherwise
+      
+      PROCEDURE grIncreaseData(sChartName, nSubscript, nValue = 1, nSeries = 1)
+      
+      nSubscript = FindChart(sChartName)
+      IF nSubscript = -1 THEN
+      	RESULT False
+      END
+      
+      // Check the object
+      IF garrChartList[nSubscript]:pclChart <> Null THEN
+      	
+      	// Increment the data
+      	garrChartList[nSubscript]:pclChart:IncrementData(nValue,nSubscript,nSeries)
+      	
+      END
+      
+      RESULT True
+     type : 458752
+   -
+     name : grDeleteAll
+     internal_properties : CAAAAAgAAACuKhAsS32yFHe6VEwWWlGqi7NssLaP7ELzFxXPVS193PVkTIFwafplZ2mtCMPCu6E6pCkZt4dc+Kl2LZ5ornjm2+Lsm2QBKnghDsIL3nHnfi1ZTO7w7D4xKb5URbaQ4Mn7lqq0fpVWHXh/HTi8Eo8Vlq+eyFSUMs0c3ejevuWyIi+0YQbxzh3nWEwmHLlneEXGFMj8TXLUX3Kkz4miKlDWw71HTr2B+qahhpvYcNOh1D/EaKneuKtM2m0t9XxLyUV/7xnXwN5QhgIvtiRg6LdxMWdiWMG1pB8Gqy39ho4ZCLYDi+R5gZf2PVKNSdF29XAGBoNsio0Tezh1oRN/BynQvfqCzaBN5lc/xBHnwhaqgo5lKNqDIZKXoxnXGDQ888z1MmtPvNot
+     procedure_id : 1760854226830350481
+     type_code : 15
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] grDeleteAll (<sChartName>)
+      //
+      // Parameters:
+      //	sChartName: Name of the chart to delete
+      // Return value:
+      // 	boolean:  True if the function was successful
+      
+      PROCEDURE grDeleteAll(sChartName)
+      
+      
+      nSubscript is int
+      // Find the chart in the array
+      nSubscript = FindChart(sChartName)
+      
+      IF nSubscript = -1 THEN
+      	RESULT True
+      ELSE
+      	
+      	// Check the object
+      	IF garrChartList[nSubscript]:pclChart <> Null THEN
+      		// The object is not null, free it		
+      		
+      		// Erases the Image control
+      		dEndDrawing(garrChartList[nSubscript]:pclChart:ImageControl())
+      		
+      		// Frees the CChart object
+      		delete garrChartList[nSubscript]:pclChart
+      		
+      		// Deletes the element from the array
+      		ArrayDelete(garrChartList,nSubscript)	
+      		
+      	END
+      	
+      END
+      
+      RESULT True
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : PocketGrapheur
+resources :
+ string_res :
+  identifier : 0x41b859715e99ef78
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+  strings :
+   -
+     text :
+      en-GB : The name of the chart is invalid
+     index : 0
+   -
+     text :
+      en-GB : The type of chart is invalid
+     index : 1
+   -
+     text :
+      en-GB : Only the line charts and the bar charts are available
+     index : 2
+   -
+     text :
+      en-GB : A chart with the same name already exists
+     index : 3
+   -
+     text :
+      en-GB : The chart does not exist anymore
+     index : 4
+   -
+     text :
+      en-GB : The %1 control does not exist
+     index : 5
+   -
+     text :
+      en-GB : "Unable to find this chart, check whether grCreate was called beforehand"
+     index : 6
+   -
+     text :
+      en-GB : The title is invalid
+     index : 7
+   -
+     text :
+      en-GB : The position of the title is invalid
+     index : 8
+   -
+     text :
+      en-GB : The position of the legend is invalid
+     index : 9
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

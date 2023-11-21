@@ -1,0 +1,323 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cLine
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x186fcf960317d3bf
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      // CAUTION ----------------------------
+      // This class manages the line charts and the scatter charts
+      // CAUTION ----------------------------
+      cLine is Class
+      	inhérits of cChart
+      	
+      	m_bScatter is boolean = False
+      	
+      	m_bLinkDot is boolean = True
+      	m_nDotSize is int = 1
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     procedure_id : 1760854222529156031
+     type_code : 27
+     code : |1+
+      // Syntax:
+      //cLine ([<bScatter>])
+      //
+      // Parameters:
+      // 	bScatter: do we draw a scatter chart?
+      // Return value:
+      // 	None
+      
+      PROCEDURE Constructor(bScatter = False)
+      
+      :m_bScatter = bScatter
+      
+     type : 589824
+   -
+     name : Destructor
+     internal_properties : CAAAAAgAAABX7NNwpf4fpJN2VZx8URbd0HnSUxb8z1KOl1gOg9hOcYXSs+Fsd81DWRQi7JvKiSJri16yeIZ5OS4YsGA56yruYumWSKwxRYvKj+B5n8X+fhBrOKTLVgd63MWLV0DMXwJG1ekCRPzu3o21
+     procedure_id : 1760854222529221567
+     type_code : 28
+     code : |1+
+      // Syntax:
+      //Class1 ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : DotSize
+     procedure_id : 1760854222529287103
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //DotSize (<nDotSize>)
+      //
+      // Parameters:
+      // 	nDotSize: Size of each point in the scatter chart in pixels
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL DotSize(nDotSize)
+      
+      
+      :m_nDotSize = nDotSize/2
+     type : 458752
+   -
+     name : LinkDot
+     procedure_id : 1760854222529352639
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //Linkdot (<bLink>)
+      //
+      // Parameters:
+      //	bLinked: Do we have to link the dots found in the scatter chart?
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL LinkDot(bLink)
+      
+      :m_bLinkDot = bLink
+     type : 458752
+   -
+     name : Draw
+     procedure_id : 1760854222529418175
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //Draw ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL Draw()
+      
+      
+      i is int
+      MarginTitleTop is int
+      MarginTitleBottom is int
+      MarginLegendLeft is int
+      MarginLegendRight is int
+      nNbPoints is int = 0
+      
+      // Retrieve the max value
+      nMaxValue is int 
+      nMinValue is int 
+      nSeries is int
+      
+      nX, nY are int
+      rVerticalRatio is real			// Number of pixels per unit of value
+      rHorizontalSpacing is int		// Number of horizontal pixels between each value
+      
+      
+      FOR nSeries = 1 _TO_ Dimension(:m_arrSeries)
+      	nMaxValue = Max(nMaxValue,:GetMaxValue(nSeries))	
+      END
+      
+      FOR nSeries = 1 _TO_ Dimension(:m_arrSeries)
+      	nMinValue = Min(nMinValue,:GetMinValue(nSeries))	
+      END
+      
+      
+      // Calculate the margins (CAUTION: the variables are passed by address and modified in the procedure called)
+      :CalculateMargins(MarginTitleBottom,MarginTitleTop, MarginLegendLeft, MarginLegendRight)
+      
+      // ----------------------------------------
+      // Calculate the work variables
+      // ----------------------------------------
+      
+      
+      // Retrieve the max of dots
+      FOR nSeries = 1 _TO_ Dimension(:m_arrSeries)
+      	nNbPoints = Max(nNbPoints,Dimension(:m_arrSeries[nSeries]:parrData))
+      END
+      
+      
+      // Calculate the vertical ratio
+      rVerticalRatio = ({:m_sNameImageControl,indControl}..Height - 2 * ::MARGIN_AXIS_Y-(MarginTitleBottom + MarginTitleTop)) / (nMaxValue - nMinValue)
+      
+      // Calculate the number of pixels between each value
+      rHorizontalSpacing = ({:m_sNameImageControl,indControl}..Width - 2 * ::MARGIN_AXIS_X - MarginLegendRight - MarginLegendLeft) / nNbPoints
+      
+      
+      // Starts drawing
+      dStartDrawing(:m_sNameImageControl)
+      
+      // Draw the axes
+      :DrawAxis(MarginTitleTop,MarginLegendLeft,{:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom + (nMinValue * rVerticalRatio) , MarginTitleBottom,MarginLegendRight)
+      
+      // Draw the marks
+      :DrawMark(nMinValue,nMaxValue,rVerticalRatio,MarginTitleBottom, MarginLegendLeft)
+      
+      // Draws the title
+      :DrawTitle()
+      
+      // ---------------------------------
+      // Draw the curve
+      // ---------------------------------
+      
+      
+      nColor is int
+      
+      // Browse the series
+      FOR nSeries = 1 _TO_ Dimension(:m_arrSeries)
+      	
+      	// Draws the legend
+      	:DrawLegend(MarginTitleTop,MarginTitleBottom, MarginLegendLeft, MarginLegendRight,nSeries,Dimension(:m_arrSeries))
+      	
+      	nColor = :GetColor(nSeries)
+      	
+      	// Starts the drawing on the axis
+      	nX = ::MARGIN_AXIS_X + MarginLegendLeft
+      	nY = {:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom + (nMinValue * rVerticalRatio) - :m_arrSeries[nSeries]:parrData[1] * rVerticalRatio
+      	
+      	
+      	// Create the source dot in the requested color
+      	dPoint(nX,nY,nColor)
+      	
+      	// Retrieve the color 
+      	// The systems performs the conversion in one direction (Display)
+      	IF nSeries <= Dimension(:m_arrColor) THEN
+      		:m_arrColor[nSeries] = dPixelColor({:m_sNameImageControl,indControl},nX,nY)
+      	ELSE
+      		:m_arrColor[Dimension(:m_arrColor)] = dPixelColor({:m_sNameImageControl,indControl},nX,nY)	
+      		
+      	END
+      	// Redraw the dot in black in order not to view it on the axis
+      	dPoint(nX,nY,Black)
+      	
+      	
+      	// ----------------------------------
+      	// Draws the lines
+      	// ----------------------------------
+      	
+      	FOR i = 2 TO nNbPoints
+      		
+      		IF :m_bScatter THEN
+      			
+      			// It's a scatter
+      			IF :m_bLinkDot
+      				// Draws the line between the previous dot and the new dot
+      				dLine(nX,nY,nX + rHorizontalSpacing,{:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom + (nMinValue * rVerticalRatio) - :m_arrSeries[nSeries]:parrData[i] * rVerticalRatio,nColor)
+      			END
+      			
+      			dCircle(nX-:m_nDotSize,nY-:m_nDotSize,nX+:m_nDotSize,nY+:m_nDotSize,nColor,nColor)	
+      		ELSE
+      			// It's a line
+      			// Draws the line between the previous dot and the new dot	
+      			dLine(nX,nY,nX + rHorizontalSpacing,{:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom + (nMinValue * rVerticalRatio) - :m_arrSeries[nSeries]:parrData[i] * rVerticalRatio,nColor)
+      			
+      			
+      		END
+      		
+      		
+      		// Update the coordinates
+      		nX += rHorizontalSpacing
+      		
+      		nY = {:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom + (nMinValue * rVerticalRatio) - :m_arrSeries[nSeries]:parrData[i] * rVerticalRatio
+      		
+      		
+      	END
+      END
+     type : 458752
+   -
+     name : ClickChart
+     internal_properties : CAAAAAgAAAAuvytHlHz5TiHS7a5EAFPI00YbQIFi7FYbniPszWccYliymt6V8M/JTvfIZ3z/7V91Mh4uPKL5sOS9fBAMmnDEC86/cT5I3voFslLPJ6jVk56MZFv0ikkCbczcHRIiBkPPijCPt/m90mfsIg7dyi2413EQ+AnTniGb2sxTvAxUlMGpSs8rZZcWVO+cRjBsmJduu3TIHN2INNSN/coT6xGtzkqjVA==
+     procedure_id : 1760854222529483711
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //ClickChart ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL ClickChart()
+      
+      // Starts the drawing on the image control
+      // If another chart was created, the current DC would not be correct, so reposition the drawing on the proper control
+      dStartDrawing(:m_sNameImageControl,dNoErase)
+      
+      
+      nX, nY are int
+      
+      // Retrieve the position of the mouse
+      nX = MouseXPos() 
+      nY = MouseYPos()
+      
+      IF :m_nLegendPosition = grNone THEN RETURN
+      
+      nSeriesSubscript is int
+      i is int
+      j is int
+      bFound is boolean
+      bFound = False
+      
+      FOR i = -2 TO 2
+      	FOR j = -2 TO 2
+      		FOR nSeriesSubscript  = 1 _TO_ Dimension(:m_arrSeries)	
+      			// Compare the color of the drawing with the color of the series
+      			IF dPixelColor(:m_sNameImageControl,nX+i,nY+j) = :m_arrColor[nSeriesSubscript] THEN
+      				// The corresponding series was found, exit		
+      				bFound = True
+      				BREAK				
+      			END	
+      		END
+      		IF bFound THEN
+      			BREAK
+      		END
+      	END
+      	IF bFound THEN
+      		BREAK
+      	END
+      END
+      
+      IF bFound THEN
+      	
+      	// Draws the colored rectangle
+      	dBackGround(White)
+      	
+      	dRectangle(:m_nLegendXCoord,:m_nLegendYCoord,{:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_Y,:m_nLegendYCoord + 20,White,Black)
+      	
+      	dRectangle(:m_nLegendXCoord + 3,:m_nLegendYCoord+3,:m_nLegendXCoord + 18,:m_nLegendYCoord+18,:m_arrColor[nSeriesSubscript],White)
+      	
+      	dFont("Arial",10,iBold)
+      	
+      	dText(:m_nLegendXCoord + 25,:m_nLegendYCoord + 3,:m_arrLegend[nSeriesSubscript],Black)
+      END
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cCourbe
+resources :
+ string_res :
+  identifier : 0x11bf054300cedf7b
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

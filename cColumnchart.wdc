@@ -1,0 +1,258 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cColumnchart
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x186fcf970353d804
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  internal_properties : CAAAAAgAAAD1dV5ZGi5AahtDwstTYEckeNtpJOV7o7j/oBRvdzohOF1wES0n50EZuFhkAfbk525ixC92GxL2yVf7OEAIZya7ni2vxhF53g==
+  type_code : 10
+  p_codes :
+   -
+     code : |1+
+      cColumnchart is Class
+      	inhérits of cChart
+      	
+      	m_nBarWidth is int = 0				
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     procedure_id : 1760854226828056580
+     type_code : 27
+     code : |1+
+      // Syntax:
+      
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      PROCEDURE Constructor()
+      
+     type : 589824
+   -
+     name : Destructor
+     procedure_id : 1760854226828122116
+     type_code : 28
+     code : |1+
+      // Syntax:
+      
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : ClickChart
+     internal_properties : CAAAAAgAAAAerzsxzIxNThH6fX6gYGf0iwYfYKlg7NabHiPsTeecYlgyGt4VcM/JTvdI53z/7d/1Mh6uPKJ5MGQ9fBCMGvDEC04/cb7I3voFstJPJ6jVEx6MpJu0SglCLQwc3dJixoMPSnDPd7l9EicsYs6dCu34FzFQOMmTXmFbGgwTfEwU1AFpig/rJVdWFC/cBvAs2mXc4Va6yu+a/lInH8QRlVt7PjqTZA==
+     procedure_id : 1760854226828187652
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //ClickChart ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL ClickChart()
+      
+      
+      nX, nY are int
+      nBarSubscript is int
+      
+      
+      // Starts the drawing on the image control
+      // If another chart was created, the current DC would not be correct, so reposition the drawing on the proper control
+      dStartDrawing(:m_sNameImageControl,dNoErase)
+      
+      // Retrieve the coordinates of the mouse (or stylus)
+      nX = MouseXPos() 
+      nY = MouseYPos()
+      
+      IF :m_nLegendPosition = grNone THEN RETURN
+      
+      
+      // Retrieve the bar that was clicked
+      nBarSubscript = nX / :m_nBarWidth
+      
+      IF nBarSubscript > Dimension(:m_arrLegend) THEN
+      	nBarSubscript = Dimension(:m_arrLegend)
+      END
+      
+      IF nBarSubscript < 1 THEN
+      	nBarSubscript = 1
+      END
+      
+      // Draws the colored rectangle
+      dBackGround(White)
+      
+      dRectangle(:m_nLegendXCoord,:m_nLegendYCoord,{:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_Y,:m_nLegendYCoord + 20,White,Black)
+      
+      dRectangle(:m_nLegendXCoord + 3,:m_nLegendYCoord+3,:m_nLegendXCoord + 18,:m_nLegendYCoord+18,:m_arrColor[nBarSubscript],White)
+      
+      
+      // Draws the text
+      
+      dFont("Arial",10,iBold)
+      
+      dText(:m_nLegendXCoord + 25,:m_nLegendYCoord + 3,:m_arrLegend[nBarSubscript],Black)
+     type : 458752
+   -
+     name : Draw
+     procedure_id : 1760854226828253188
+     type_code : 12
+     code : |1+
+      // Summary: Draws the bar chart
+      // Syntax:
+      //Draw ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE VIRTUAL Draw()
+      
+      // Parameters of the bar chart
+      nSourceX,nSourceY				are int	// Source dot: Bottom Left
+      nWidth				is int		// Width of each bar
+      nRaised					is int		// Value of 3D
+      rFactor				is real			// Factor of scale for the height
+      nNbBar				is int		// Number of bars
+      nColor				is int		// Color of the bar 
+      nBar					is int		// Number of the bar to edit
+      nX,nY					are int	// work variables
+      nMarginTitleBottom 			is int		// The margin that must be left at the bottom
+      nMarginTitleTop 		is int		// The margin that must be left at the top
+      nMarginLegendLeft 	is int		// The margin that must be left at the bottom
+      nMarginLegendRight 	is int		// The margin that must be left at the top
+      
+      nRaised = 5									// The raised effect is set to 5 points
+      
+      
+      // Check the existence of the control
+      IF ControlExist(:m_sNameImageControl) = False THEN
+      	RETURN
+      END
+      
+      // Retrieve the max value
+      nMaxValue is int = :GetMaxValue(1)
+      nMinValue is int = :GetMinValue(1)
+      
+      
+      // Calculate the margins (caution: the variables are passed by address and modified in the procedure)
+      :CalculateMargins(nMarginTitleBottom, nMarginTitleTop, nMarginLegendLeft, nMarginLegendRight)
+      
+      // ---------------------------------------------
+      // 		Description of the bar chart
+      // ---------------------------------------------
+      
+      // Calculate the factor (number of pixels for each unit of value
+      // Number of pixels intended for the chart (Height of control - Total of margins (2*::MARGIN_AXIS_Y - (MarginTitleBottom+MarginTitleTop))
+      // divided by (The gap of values)
+      rFactor= ({:m_sNameImageControl,indControl}..Height -2*::MARGIN_AXIS_Y - (nMarginTitleBottom+nMarginTitleTop)) / (nMaxValue - nMinValue)
+      
+      
+      // Position for the beginning of drawing
+      nSourceX = ::MARGIN_AXIS_X + 1 + nMarginLegendLeft		// X coordinate
+      
+      // Position of the column chart: Height of control - Bottom margins
+      IF nMinValue < 0 THEN
+      	nSourceY = {:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - nMarginTitleBottom + (nMinValue * rFactor)		// Position of the origin for the histogram	
+      ELSE
+      	nSourceY = {:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - nMarginTitleBottom		// Position of the origin for the histogram
+      END
+      
+      // Number of bars
+      nNbBar=Dimension(:m_arrSeries[1]:parrData)							
+      // Width of each bar
+      nWidth=({:m_sNameImageControl,indControl}..Width -2*::MARGIN_AXIS_X - nMarginLegendRight - nMarginLegendLeft) / nNbBar					// The width of each bar is set to 34
+      
+      
+      // Save the width of a bar
+      :m_nBarWidth = nWidth
+      
+      // -----------------------------------------------------
+      // Starts drawing
+      // -----------------------------------------------------
+      
+      dStartDrawing(:m_sNameImageControl)
+      
+      
+      // Draws the axes
+      :DrawAxis(nMarginTitleTop, nMarginLegendLeft,nSourceY,nMarginTitleBottom, nMarginLegendRight)
+      
+      // Draws the title
+      :DrawTitle()
+      
+      // Draws the marks
+      :DrawMark(nMinValue,nMaxValue,rFactor,nMarginTitleBottom, nMarginLegendLeft)
+      
+      
+      // Draw the column charts
+      
+      nX=nSourceX				// source position to the left
+      
+      FOR nBar = 1 TO nNbBar
+      	
+      	// Draws the legend
+      	:DrawLegend(nMarginTitleTop, nMarginTitleBottom, nMarginLegendLeft, nMarginLegendRight, nBar, nNbBar)
+      	nColor = :GetColor(nBar)
+      	
+      	dBackGround(nColor)
+      	dPen(RGB(100,100,100))
+      	
+      	// Calculates the height of the bar chart
+      	nY = nSourceY-(:m_arrSeries[1]:parrData[nBar]*rFactor)
+      	
+      	// Draws the base rectangle  
+      	dPolygon(4, nX,nSourceY, nX,nY, nX+nWidth,nY, nX+nWidth,nSourceY)
+      	
+      	// The other sides are darker: change the color
+      	nColor = :GiveColorRaised(nColor)
+      	
+      	dBackGround(nColor)
+      	// Draws the side
+      	dPolygon(4, nX+nWidth,nY, nX+nWidth+nRaised,nY-nRaised,nX+nWidth+nRaised,nSourceY-nRaised, nX+nWidth,nSourceY)
+      	
+      	// Draw the top of the bar only if the value is positive
+      	IF :m_arrSeries[1]:parrData[nBar] > 0 THEN
+      		
+      		// Draws the top
+      		dPolygon(4, nX,nY, nX+nRaised,nY-nRaised, nX+nWidth+nRaised,nY-nRaised, nX+nWidth,nY)
+      		
+      	ELSE
+      		
+      		dPolygon(4,nX,nSourceY,nX+nRaised,nSourceY - nRaised,nX+nWidth+nRaised,nSourceY-nRaised,nX+nWidth,nSourceY)
+      		
+      	END	
+      	nX = nX + nWidth
+      END
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cHistogramme
+resources :
+ string_res :
+  identifier : 0x11befebd005a64a7
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

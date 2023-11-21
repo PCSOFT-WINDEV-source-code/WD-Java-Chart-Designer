@@ -1,0 +1,741 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : cChart
+ major_version : 28
+ minor_version : 0
+ type : 4
+ description : ""
+ subtype : 0
+class :
+ identifier : 0x186fcf960336d574
+ internal_properties : CAAAAAgAAAB2/vstTMCJbS/hlxjFxirSqKvCUuv8YxgpWyl7S3iA
+ code_elements :
+  type_code : 10
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAC5+6znH4xtBlHaN3ikr+7/ecsOPBZ357NhGLM++FVJEQteQKANqt1R0pnvJjQKA7xJ/LikJkoF2aGwG0xh/4vnTqbHKno3ZykLRTXjz9ntNXQud77TSll4+5vog+AIqFMSDtJYd734HNLkBV4=
+     code : |1+
+      CONSTANT
+      	
+      	// Constants containing the type of chart
+      	CN_HISTO = 1
+      	CN_LINE = 2
+      	CN_SCATTER = 5
+      	
+      	
+      	// Horizontal and vertical margins
+      	MARGIN_AXIS_X = 20
+      	MARGIN_AXIS_Y = 10
+      	
+      END
+      
+      
+      Series is Structure
+      	
+      	parrData is array dynamic		// The array that will contain the values of the chart for a series
+      	
+      END
+      
+      
+      
+      
+      cChart is Class
+      	
+      	
+      PROTECTED
+      	
+      	m_nChartType is int								// Type of chart (column, line or scatter)
+      	m_sNameImageControl is string							// The name of the image control where the drawing will be done
+      	
+      	m_arrSeries is array dynamic of 0 Series			// The array containing the series (an array per series)
+      	
+      	m_arrLegend is array dynamic of 0 strings		// The array containing the legend for each series (line or scatter) or for each category
+      	m_arrColor is array dynamic of 0 int			// The array containing the colors for each series
+      	
+      	
+      	// Members regarding the title of the chart
+      	
+      	m_sTitle is string = ""								// Title of the chart
+      	m_nTitlePosition is int = grNone					// Position of the chart
+      	
+      	m_sFontTitle is string = "Arial"					// Font of the chart
+      	m_nTitleSize is int = 12						// Size of the chart
+      	m_nTitleColor is int = Black					// Color of the chart
+      	
+      	
+      	// Members regarding the legend of the chart
+      	
+      	m_nLegendPosition is int = grNone				// Position of the legend
+      	
+      	m_nLegendXCoord is int = -1					// X-coordinate of the source point for the legend (top left)
+      	m_nLegendYCoord is int = -1					// Y-coordinate of the source point for the legend (top left)	
+      	
+      END
+      
+     type : 131072
+  procedures :
+   -
+     name : Constructor
+     procedure_id : 1760854222531188084
+     type_code : 27
+     code : |1-
+      // Syntax:
+      //CChart ([<nChartType>])
+      //
+      // Parameters:
+      //	nChartType: Type of chart to build
+      // Return value:
+      // 	None
+      
+      PROCEDURE Constructor(nChartType = ::CN_LINE)
+      
+      :m_nChartType = nChartType
+      
+      :SeriesColor(1,PastelGreen)
+      :SeriesColor(2,PastelRed)
+      :SeriesColor(3,PastelBlue)
+      :SeriesColor(4,PastelMagenta)
+      :SeriesColor(5,PastelCyan)
+      :SeriesColor(6,PastelYellow)
+     type : 589824
+   -
+     name : Destructor
+     internal_properties : CAAAAAgAAABX7NNwpf4fpJN2VZx8URbd0HnSUxb8z1KOl1gOg9hOcYXSs+Fsd81DWRQi7JvKiSJri16yeIZ5OS4YsGA56yruYumWSKwxRYvKj+B5n8X+fhBrOKTLVgd63MWLV0DMXwJG1ekCRPzu3o21
+     procedure_id : 1760854222531253620
+     type_code : 28
+     code : |1+
+      // Syntax:
+      //Class1 ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      PROCEDURE Destructor()
+      
+     type : 655360
+   -
+     name : ImageControl
+     procedure_id : 1760854222531319156
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] ImageControl ([<sNameOfControl> is string])
+      //
+      // Parameters:
+      //	sNameOfControl (ANSI string - default value=""): Name of the image control where the drawing will be performed
+      
+      PROCEDURE ImageControl(sNameOfControl is string = "")
+      
+      // Check the image control
+      IF ControlExist(sNameOfControl) THEN
+      	
+      	:m_sNameImageControl = sNameOfControl
+      	
+      END
+      
+      RESULT :m_sNameImageControl
+     type : 458752
+   -
+     name : AddData
+     procedure_id : 1760854222531384692
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //AddData (<nValue> [, <nSubscript> [, <nSeries>]])
+      //
+      // Parameters:
+      //	nValue: Value to add
+      //	nSubscript (default value=-1): Subscript where the addition will be performed
+      //	nSeries (default value=1): Series to which the value will be added
+      
+      PROCEDURE AddData(nValue, nSubscript = -1, nSeries = 1)
+      
+      // The series exists
+      IF nSeries <= Dimension(:m_arrSeries) THEN
+      	
+      	// Check the subscript
+      	IF nSubscript < Dimension(:m_arrSeries[nSeries]:parrData) AND nSubscript <> -1 THEN
+      		
+      		// The subscript already exists
+      		:m_arrSeries[nSeries]:parrData[nSubscript] = nValue
+      		
+      	ELSE
+      		// Add the data to the array
+      		ArrayAdd(:m_arrSeries[nSeries]:parrData,nValue)
+      		ArrayAdd(:m_arrLegend,"")
+      		
+      	END	
+      	
+      ELSE
+      	// Add the series and the data
+      	MySeries is Series
+      	
+      	ArrayAdd(:m_arrSeries,MySeries)
+      	
+      	:m_arrSeries[nSeries]:parrData = new array dynamic of 0 reals
+      	
+      	// Add the data to the array
+      	ArrayAdd(:m_arrSeries[nSeries]:parrData,nValue)
+      	ArrayAdd(:m_arrLegend,"")	
+      	
+      END
+      
+     type : 458752
+   -
+     name : Draw
+     procedure_id : 1760854222531450228
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //Draw ()
+      //
+      // Draw the chart
+      
+      PROCEDURE VIRTUAL Draw()
+      
+      
+      
+      
+     type : 458752
+   -
+     name : GetMaxValue
+     procedure_id : 1760854222531515764
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] GetMaxValue (<nSeries>)
+      //
+      // Parameters:
+      //	nSeries: Number of the series for which the maximum value must be calculated
+      // Return value:
+      // 	integer: The maximum value
+      
+      PROCEDURE GetMaxValue(nSeries)
+      
+      nMaxValue is int
+      
+      i is int
+      
+      // Browse the array of data to find the maximum possible value
+      FOR i = 1 _TO_ Dimension(:m_arrSeries[nSeries]:parrData)
+      	
+      	nMaxValue = Max(nMaxValue,:m_arrSeries[nSeries]:parrData[i])
+      	
+      END
+      
+      RESULT nMaxValue
+     type : 458752
+   -
+     name : GetMinValue
+     procedure_id : 1760854222531581300
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //[ <Result> = ] GetMinValue (<nSeries>)
+      //
+      // Parameters:
+      //	nSeries: Number of the series for which the minimum value must be calculated
+      // Return value:
+      // 	integer: Minimum value of the series
+      
+      PROCEDURE GetMinValue(nSeries)
+      
+      nMinValue is int
+      
+      i is int
+      // Browse the array of data to find the minimum value of the data
+      FOR i = 1 _TO_ Dimension(:m_arrSeries[nSeries]:parrData)
+      	
+      	nMinValue = Min(nMinValue,:m_arrSeries[nSeries]:parrData[i])
+      	
+      END
+      
+      RESULT nMinValue
+     type : 458752
+   -
+     name : GetColor
+     internal_properties : CAAAAAgAAABaB/QxIxuER7P1K9W/SGwcjnLP/i+7/V3k9LHDxx5yM7QiZWN3xCMSrGHDRRzxwMYfDyFOJ1EUq1rWWML4em6QWBS0+0eKwnq0X8xr4dSTHkZYImN2MXrQMmkXufHYcbXYSuJV6HonzV4AeMR7cNuLGmTqwRCtW8Tt2s8IbBNog0xxTjUkw4ivnQIJPA3yD2kc5ncOWfxNMTMaoM79ii7vJC+ZYLgaNIawEdY+BiIuUAvOMd7rurv82tIaDJMKaR6V+3hqIT9llBP92B6deFnYcRbNilMM6ak6HvyjzhhIhN0pcctC/ZhGEKFqFUoCAAC2BuK9Eiisf6Y7OEXgq9E8hUIBdpXooXekShhUFDKE7YXKvrY4jpQ1ZefklbMpQQ8e
+     procedure_id : 1760854222531646836
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] GiveColor ([<nColorSubscript>])
+      //
+      // Parameters:
+      //	nColorSubscript: Subscript of the color to return
+      // Return value:
+      // 	integer:  	Selected color
+      
+      PROCEDURE GetColor(nColorSubscript = -1)
+      
+      
+      IF nColorSubscript > 6 THEN
+      	
+      	ArrayAdd(:m_arrColor,RGB(Random(1,255),Random(1,255),Random(1,255)))
+      	RESULT :m_arrColor[Dimension(:m_arrColor)]
+      	
+      ELSE
+      	
+      	RESULT :m_arrColor[nColorSubscript]
+      	
+      END
+     type : 458752
+   -
+     name : SetTitle
+     procedure_id : 1760854222531712372
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //SetTitle (<sTitle>, <nPosition>)
+      //
+      // Parameters:
+      // 	sTitle: Title of the chart
+      // 	nPosition: Position of the title (grAtTop, grAtBottom, grNone)
+      // Return value:
+      // 	None
+      
+      PROCEDURE SetTitle(sTitle, nPosition)
+      
+      :m_sTitle = sTitle
+      :m_nTitlePosition = nPosition
+      
+     type : 458752
+   -
+     name : FontTitle
+     procedure_id : 1760854222531777908
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //FontTitle (<sFontName>, <nSize>[, <nColor>])
+      //
+      // Parameters:
+      //	sFontName: Name of the font that will be used for the title
+      //	nSize: Size of the font
+      //	nColor: Color of the font
+      
+      PROCEDURE FontTitle(sFontName,nSize,nColor=Black)
+      
+      :m_sFontTitle = sFontName
+      :m_nTitleColor = nColor
+      :m_nTitleSize = nSize
+     type : 458752
+   -
+     name : Legend
+     procedure_id : 1760854222531843444
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //Legend (<nPosition>)
+      //
+      // Parameters:
+      //	nPosition: Position of the legend (grAtTop, grAtBottom, grNone)
+      
+      PROCEDURE Legend(nPosition)
+      
+      :m_nLegendPosition = nPosition
+     type : 458752
+   -
+     name : ClickChart
+     procedure_id : 1760854222531908980
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //ClickChart ()
+      //
+      // This method is used to redraw the legend
+      
+      PROCEDURE VIRTUAL ClickChart()
+      
+     type : 458752
+   -
+     name : AddLegend
+     procedure_id : 1760854222531974516
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] AddLegend (<nSubscript>, <sString>)
+      //
+      // Parameters:
+      //	nSubscript: Subscript (bar) or series (line and scatter) of the legend
+      //	sString: Caption of the legend
+      
+      PROCEDURE AddLegend(nSubscript,sString)
+      
+      // Check the subscript
+      IF nSubscript > Dimension(:m_arrLegend) THEN
+      	RESULT False	
+      END
+      
+      :m_arrLegend[nSubscript] = sString
+      
+      RESULT True
+     type : 458752
+   -
+     name : SeriesColor
+     procedure_id : 1760854222532040052
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //SeriesColor (<nSeries>, <nColor>)
+      //
+      // Parameters:
+      //	nSeries: Number of the series
+      //	nColor: Color to assign
+      
+      PROCEDURE SeriesColor(nSeries, nColor)
+      
+      
+      IF nSeries <= Dimension(:m_arrColor) THEN
+      	
+      	:m_arrColor[nSeries] = nColor
+      	
+      ELSE
+      	
+      	ArrayAdd(:m_arrColor,nColor)
+      	
+      END
+     type : 458752
+   -
+     name : GiveColorRaised
+     procedure_id : 1760854222532105588
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] GiveColorRaised (<nColor>)
+      //
+      // Parameters:
+      //	nColor: Color from which a color must be found for the raised effect
+      // Return value:
+      // 	integer: Color for the raised effect
+      
+      PROCEDURE GiveColorRaised(nColor)
+      
+      nRed, nGreen, nBlue is int
+      
+      // Retrieve the Green, Red and Blue components (see the function named RGB)
+      nRed = modulo(nColor,256)
+      nGreen = modulo(nColor/256,256)
+      nBlue = modulo(nColor/(256*256),256)
+      
+      nRed = Min(255,nRed*0.7)
+      nBlue = Min(255,nBlue*0.7)
+      nGreen = Min(255,nGreen*0.7)
+      
+      RESULT RGB(nRed,nGreen,nBlue)
+      
+     type : 458752
+   -
+     name : IncrementData
+     internal_properties : CAAAAAgAAAByVII4ds7haDbPHKS8nKYj9Kh9PIdNoaxJDJ7jSwVwbIg5Pa52tSufN0kjvDnGtLZ1HBS5NzDhuwp0y54Z/IwOY3GVbbBZRP3FWlRAopFpD/EjeiphKKx4q5xpTrVcEY9c7laMiFHEQJW8aWFUjirmLsHmSdaHF22D7GGmzWpPP0em9U3hNJlDfT6SCoQ1+MBnK+rjUw==
+     procedure_id : 1760854222532171124
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //[ <Result> = ] IncrementData (<nValue>, <nSubscript>, <nSeries>)
+      //
+      // Parameters:
+      //	nValue: Value that must be added
+      //	nSubscript: Subscript where the value will be added
+      //	nSeries: Series to which this value will be added
+      
+      PROCEDURE IncrementData(nValue,nSubscript,nSeries)
+      
+      
+      IF nSeries > Dimension(:m_arrSeries) THEN RESULT False
+      
+      
+      IF nSubscript > Dimension(:m_arrSeries[nSeries]:parrData) THEN RESULT False
+      
+      // Increment the value
+      :m_arrSeries[nSeries]:parrData[nSubscript] += nValue
+      
+      RESULT True
+      
+      
+     type : 458752
+   -
+     name : CalculateMargins
+     procedure_id : 1760854222532236660
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //CalculateMargins (<MarginTitleBottom>, <MarginTitleTop>, <MarginLegendLeft>, <MarginLegendRight>)
+      //
+      // Parameters:
+      //	MarginTitleBottom: bottom margin for the title
+      //	MarginTitletop: top margin for the title
+      // 	MarginLegendLeft: <specify the role of MarginLegendLeft>
+      // 	MarginLegendRight: <specify the role of MarginLegendRight>
+      // Return value:
+      // 	None
+      
+      PROCEDURE CalculateMargins(MarginTitleBottom,MarginTitleTop, MarginLegendLeft, MarginLegendRight)
+      
+      IF :m_sTitle ~= "" THEN
+      	
+      	MarginTitleBottom = 0
+      	
+      ELSE
+      	SWITCH :m_nTitlePosition
+      	
+      		CASE grAtBottom
+      			
+      			MarginTitleBottom = 15		// Leave 15 vertical pixels for the title (at the bottom)
+      			MarginTitleTop = 0				
+      			
+      		CASE grAtTop
+      			
+      			MarginTitleTop = 20		// Leave 20 vertical pixels for the title (at the top)
+      			MarginTitleBottom = 0			
+      			
+      		OTHER CASE
+      			
+      			
+      	END
+      	
+      END
+      
+      
+      SWITCH :m_nLegendPosition
+      
+      	CASE grAtLeft
+      		
+      		MarginLegendLeft = 100		// Leave 22 horizontal pixels for the legend (on the left)
+      		MarginLegendRight = 0		
+      		
+      	CASE grAtRight
+      		
+      		MarginLegendLeft = 0		// Leave 22 horizontal pixels for the legend (on the right)
+      		MarginLegendRight = 100		
+      		
+      	OTHER CASE
+      		
+      END
+     type : 458752
+   -
+     name : DrawAxis
+     internal_properties : CAAAAAgAAADCGzFbcKATpx8TPkr+vXVvdaEKKhyhnSRx3XG5/Hu51C1qHdRqfrfD2o9QpNKEsd2nmJPPTeZQhZ9/h5LZEv+kxw461+YmRuI9NCEfg/27sitNZzZwxdvo4f85uExdcvRv3EH6bU5r5BNd/1GBVcmXjX0VxVXOPBOX85PwpqNYw5eNu2gLNgM+jpRzg+Y4UA2m5QULaK+IWB12BGpaeweIvY2B
+     procedure_id : 1760854222532302196
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //DrawAxis (<MarginTitleTop>, <MarginLegendLeft>, <SourceY> [, <MarginTitleBottom> [, <MarginLegendRight>]])
+      //
+      // Parameters:
+      //	MarginTitletop: top margin for the title
+      //	MarginLegendLeft: <specify the role of MarginLegendLeft>
+      //	SourceY: <specify the role of SourceY>
+      //	MarginTitleBottom (default value=0): bottom margin for the title
+      //	MarginLegendRight (default value=0): <specify the role of MarginLegendLeft>
+      // Return value:
+      // 	None
+      
+      PROCEDURE DrawAxis(MarginTitleTop, MarginLegendLeft, Sourcey, MarginTitleBottom=0, MarginLegendRight = 0)
+      
+      
+      // Draws the axes
+      // Vertical axis
+      dLine(::MARGIN_AXIS_X + MarginLegendLeft,::MARGIN_AXIS_Y+MarginTitleTop,::MARGIN_AXIS_X+ MarginLegendLeft,{:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom,Black)
+      
+      // Draws an arrow at the top of the vertical axis
+      dPolygon(3,::MARGIN_AXIS_X+ MarginLegendLeft,::MARGIN_AXIS_Y+MarginTitleTop,::MARGIN_AXIS_X + MarginLegendLeft- 3,::MARGIN_AXIS_Y+MarginTitleTop+3,::MARGIN_AXIS_X + MarginLegendLeft+3,::MARGIN_AXIS_Y+MarginTitleTop+3,Black,Black)
+      
+      // Horizontal axis
+      dLine(::MARGIN_AXIS_X+MarginLegendLeft,Sourcey,{:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_X-MarginLegendRight,Sourcey,Black)
+      
+      // Draws the arrow of the horizontal axis
+      dPolygon(3,...
+      {:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_X - MarginLegendRight,	// X coordinate of the end point for the horizontal axis
+      Sourcey,													// Y coordinate of the end point for the horizontal axis
+      {:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_X-3 - MarginLegendRight,	
+      Sourcey-3,
+      {:m_sNameImageControl,indControl}..Width -::MARGIN_AXIS_X-3 - MarginLegendRight,
+      Sourcey+3,Black,Black)
+     type : 458752
+   -
+     name : DrawMark
+     internal_properties : CAAAAAgAAABEa2mHavKjBJ8wB4yGtjmGWchCX1N95PIRpFdmU8nqAL5sjL7RBKMtfM1swdYBp8GHMKSCxHptZDbnxAZCHJ4a3ZSxedKk4pL7sLLl9UoD6cSmNfBH/7LloJd1grmLneRk31WYZrpqQcbbk5N8I7g12OJFIbBEG5Q+PaGEnym/URrSrxAqFlQVB3KxD5uxQG+DPf5Oei/mSk7PN+g5EevbvrbJvg==
+     procedure_id : 1760854222532367732
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //DrawMark (<nMinValue>, <nMaxValue>, <nFactor>, <MarginTitleBottom>, <MarginLegendLeft>)
+      //
+      // Parameters:
+      //	nMinValue: Minimum value of the chart
+      //	nMaxValue: Maximum value of the chart
+      //	nFactor: <specify the role of nFactor>
+      //	MarginTitleBottom: bottom margin for the title
+      // 	MarginLegendLeft: <specify the role of MarginLegendLeft>
+      // Return value:
+      // 	None
+      
+      PROCEDURE DrawMark(nMinValue,nMaxValue,nFactor,MarginTitleBottom, MarginLegendLeft)
+      
+      
+      // Management of the marks
+      // Writes the first mark (min value)
+      
+      nMarkDistance is int
+      i is int
+      nValue is int
+      nPixelsBetweenMark is int
+      
+      // Create the font for the marks
+      dFont("Arial",8,iNormal)
+      
+      // Calculate the distance in value between each mark
+      nMarkDistance = ( nMaxValue + Abs(nMinValue) ) / 5 
+      // Calculate the number of pixels between each mark
+      nPixelsBetweenMark = nMarkDistance * nFactor
+      
+      // Draw the marks
+      nValue = nMinValue
+      
+      nY is int = {:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y - MarginTitleBottom - 12
+      
+      dText(MarginLegendLeft,nY,nValue,Black)
+      nY -= nPixelsBetweenMark
+      
+      FOR i = 1 TO 5
+      	nValue += nMarkDistance
+      	dText(MarginLegendLeft,nY ,nValue ,Black)
+      	nY -= nPixelsBetweenMark
+      END
+     type : 458752
+   -
+     name : DrawTitle
+     procedure_id : 1760854222532433268
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //DrawTitle ()
+      //
+      // Parameters:
+      //	None
+      // Return value:
+      // 	None
+      
+      PROCEDURE DrawTitle()
+      
+      // Define the font for the title
+      dFont(:m_sFontTitle,:m_nTitleSize,iBold)
+      
+      // Draw the title
+      SWITCH :m_nTitlePosition
+      
+      	CASE grNone
+      		
+      		// No action
+      		
+      	CASE grAtBottom
+      		
+      		dText(({:m_sNameImageControl,indControl}..Width - 2 * ::MARGIN_AXIS_X - Length(:m_sTitle) * 4 )/2,{:m_sNameImageControl,indControl}..Height - ::MARGIN_AXIS_Y -10,:m_sTitle,:m_nTitleColor)
+      		
+      	CASE grAtTop
+      		
+      		dText(({:m_sNameImageControl,indControl}..Width - 2 * ::MARGIN_AXIS_X - Length(:m_sTitle) * 4 )/2,2,:m_sTitle,:m_nTitleColor)
+      		
+      END
+     type : 458752
+   -
+     name : DrawLegend
+     internal_properties : CAAAAAgAAAD1Rw85zpqoHkenUx7JvJ2k/dKEjiv44hNoYiifo+h0Fnc7+QfElVCA9lxGQ12R4QEiN4pV1aTTp2SUgdUxp1WqdcwmiM5w5fxg64j0UyQBXetKI0gmvSuJOLoAESX0xcGik57ZjBFoo87yGES8NOgwfLiKFITrX5R8gD7jSbJr7gxQ8Gv+mWt2e8GEuZ3c2BF8VAs12iegdhjmi0xgv9gHhCiua5b6mIKqT4cuqaaL5zXKZg==
+     procedure_id : 1760854222532498804
+     type_code : 12
+     code : |1-
+      // Syntax:
+      //DrawLegend (<MarginTitleTop>, <MarginTitleBottom>, <MargingLegendLeft>, <MarginLegendRight>, <nSeries>, <nNbSeries>)
+      //
+      // Parameters:
+      //	MarginTitleTop: top margin for the title
+      //	MarginTitleBottom: <specify the role of MarginTitleBottom>
+      //	MarginLegendLeft: <specify the role>
+      //	MarginLegendRight: <specify the role of MarginLegendRight>
+      //	nSeries: <specify the role of nSeries>
+      //	nNbSeries: <specify the role of nNbSeries>
+      // Return value:
+      // 	None
+      
+      
+      PROCEDURE DrawLegend(MarginTitleTop,MarginTitleBottom, MarginLegendLeft,MarginLegendRight, nSeries, nNbSeries)
+      
+      SWITCH :m_nLegendPosition
+      
+      	CASE grAtLeft		
+      		
+      		// Save the coordinates of the source point for the legend
+      		:m_nLegendXCoord = 1
+      		:m_nLegendYCoord = MarginTitleTop 
+      		
+      		dRectangle(:m_nLegendXCoord,:m_nLegendYCoord,:m_nLegendXCoord+MarginLegendLeft-20,Min(:m_nLegendYCoord+nNbSeries*15 +3, {:m_sNameImageControl,indControl}..Height- MarginTitleBottom),Transparent,Black)	
+      		
+      		// Draws the colored rectangle
+      		dRectangle(:m_nLegendXCoord + 3,:m_nLegendYCoord+(nSeries-1)*15+2,:m_nLegendXCoord + 15,:m_nLegendYCoord+nSeries*15,:GetColor(nSeries),White)
+      		
+      		dFont("Arial",7)
+      		dText(:m_nLegendXCoord + 25,:m_nLegendYCoord +(nSeries-1)*15+2,:m_arrLegend[nSeries],Black)		
+      		
+      	CASE grAtRight
+      		
+      		// Save the coordinates of the source point for the legend
+      		:m_nLegendXCoord = {:m_sNameImageControl,indControl}..Width - MarginLegendRight + 20 - 5
+      		:m_nLegendYCoord = MarginTitleTop 
+      		
+      		dRectangle(:m_nLegendXCoord,:m_nLegendYCoord, :m_nLegendXCoord + MarginLegendRight -20 ,Min(:m_nLegendYCoord+nNbSeries*15 +3, {:m_sNameImageControl,indControl}..Height- MarginTitleBottom),Transparent,Black)	
+      		
+      		// Draws the colored rectangle
+      		dRectangle(:m_nLegendXCoord + 3,:m_nLegendYCoord+(nSeries-1)*15+2,:m_nLegendXCoord + 15,:m_nLegendYCoord+nSeries*15,:GetColor(nSeries),White)
+      		
+      		dFont("Arial",7)
+      		dText(:m_nLegendXCoord + 25,:m_nLegendYCoord + (nSeries-1)*15+2,:m_arrLegend[nSeries],Black)
+      		
+      		
+      END
+     type : 458752
+   -
+     name : LinkDot
+     procedure_id : 1760854222532564340
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //Linkdot (<bLink>)
+      //
+      // Parameters:
+      // 	bLink: <specify the role of bLink>
+      // Return value:
+      // 	None
+      
+      
+      PROCEDURE VIRTUAL LinkDot(bLink <useful>)
+     type : 458752
+   -
+     name : DotSize
+     procedure_id : 1760854222532629876
+     type_code : 12
+     code : |1+
+      // Syntax:
+      //DotSize (<nDotSize>)
+      //
+      // Parameters:
+      // 	nDotSize: <specify the role of nDotSize>
+      // Return value:
+      // 	None
+      
+      
+      PROCEDURE VIRTUAL DotSize(nDotSize <useful>)
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : cGraphe
+resources :
+ string_res :
+  identifier : 0x11b85a760022ec29
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
